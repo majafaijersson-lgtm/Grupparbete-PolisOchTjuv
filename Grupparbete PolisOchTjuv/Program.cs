@@ -8,6 +8,7 @@
             Console.WriteLine("ÄNDRING");
             Console.WriteLine("Hej från mig");
             Console.WriteLine("Hej");
+            Console.WriteLine("Majasaaaa");
         }
     }
 }
