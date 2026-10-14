@@ -7,6 +7,7 @@
             Console.WriteLine("Hello, World!");
             Console.WriteLine("ÄNDRING");
             Console.WriteLine("Hej från mig");
+            Console.WriteLine("Hej");
         }
     }
 }
