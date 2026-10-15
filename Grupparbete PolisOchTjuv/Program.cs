@@ -11,6 +11,15 @@ namespace Grupparbete_PolisOchTjuv
 
             City.PrintCity(myCity);
 
+            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
+
+            List<Person> personList = new List<Person>();
+
+            //ANropa metod i Helpers
+
+
+
+
         }
     }
 }
