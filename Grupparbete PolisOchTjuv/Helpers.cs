@@ -69,31 +69,31 @@ namespace Grupparbete_PolisOchTjuv
 
 
 
-        public static List<Person> CreatePeople()
+        public static List<Police> CreatePolice()
         {
-            List<Person> personList = new List<Person>();
+            List<Police> personList = new List<Police>();
+            List<string> seizedInventory = new List<string>();
 
             for (int i = 1; i < 10; i++)
             {
-                Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/
+                int rndStartX = Random.Shared.Next(1, 100);
+                int rndStartY = Random.Shared.Next(1, 25);
+                int rndMovementX = Random.Shared.Next(-1, 2);
+                int rndMovementY = Random.Shared.Next(-1, 2);
+                personList.Add(new Police(GetName(), rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
+                //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/
                 
             }
+
             return personList;
 
-            Comedy movie1 = new("Dum dummare", 139, 20, actors);
-            movie1.Actors.Add("Kalle Banan(född 2001)");
 
-            Action movie2 = new("Knogmackan", 192, 79, actors);
-            movie2.Actors.Add("Tom Kross(född 1998)");
-
-            SciFi movie3 = new("Sun Wars", 29, 119, actors);
-            movie3.Actors.Add("Yoda(född 1491)");
-
-            List<Movie> movies = new List<Movie>();             //Lista med objekt av classen Movie
-            movies.Add(movie1);
-            movies.Add(movie2);
-            movies.Add(movie3);
         }
+
+        //public static List<Person> CreateThief()
+        //{
+
+        //}
 
 
     }

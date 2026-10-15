@@ -13,7 +13,14 @@ namespace Grupparbete_PolisOchTjuv
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
 
-            List<Person> personList = new List<Person>();
+            List<Police> personList = new List<Police>();
+
+            personList = Helpers.CreatePolice();
+
+            foreach (Police police in personList)
+            {
+                Console.WriteLine($"{police.Name}, {police.Inventory}");
+            }
 
             //ANropa metod i Helpers
 
