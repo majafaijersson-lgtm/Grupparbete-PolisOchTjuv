@@ -80,7 +80,8 @@ namespace Grupparbete_PolisOchTjuv
                 int rndStartY = Random.Shared.Next(1, 25);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
-                personList.Add(new Police(GetName(), rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
+                char icon = 'P';
+                personList.Add(new Police(GetName(), icon, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
                 //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/
                 
             }
@@ -90,10 +91,48 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
-        //public static List<Person> CreateThief()
-        //{
+        public static List<Thief> CreateThief()
+        {
+            List<Thief> personList = new List<Thief>();
+            List<string> stolenInventory = new List<string>();
 
-        //}
+            for (int i = 1; i < 10; i++)
+            {
+                int rndStartX = Random.Shared.Next(1, 100);
+                int rndStartY = Random.Shared.Next(1, 25);
+                int rndMovementX = Random.Shared.Next(-1, 2);
+                int rndMovementY = Random.Shared.Next(-1, 2);
+                char icon = 'T';
+                personList.Add(new Thief(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, stolenInventory));
+             
+
+            }
+
+            return personList;
+
+
+        }
+
+        public static List<Citizen> CreateCitizen()
+        {
+            List<Citizen> personList = new List<Citizen>();
+            List<string> inventory = new List<string>();
+            for (int i = 1; i < 10; i++)
+            {
+                int rndStartX = Random.Shared.Next(1, 100);
+                int rndStartY = Random.Shared.Next(1, 25);
+                int rndMovementX = Random.Shared.Next(-1, 2);
+                int rndMovementY = Random.Shared.Next(-1, 2);
+                char icon = 'C';
+                personList.Add(new Citizen(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
+                inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
+
+            }
+
+            return personList;
+
+
+        }
 
 
     }
