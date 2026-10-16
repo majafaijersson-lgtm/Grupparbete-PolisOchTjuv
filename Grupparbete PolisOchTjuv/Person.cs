@@ -20,7 +20,7 @@ namespace Grupparbete_PolisOchTjuv
             CurrentPositionX = currentPositionX;
             CurrentPositionY = currentPositionY;
             MovePositionX = movePositionX;
-            MovePositionX = movePositionY;
+            MovePositionY = movePositionY;
         }
 
         public static void PersonMove(List<Person> allPersons) //List inparameter rndMovementX och Y för att göra riktningsädnringar

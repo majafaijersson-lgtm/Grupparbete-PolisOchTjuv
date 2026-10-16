@@ -24,6 +24,8 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
 
+
+
             while(true)
             {
                 Console.Clear();
