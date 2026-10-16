@@ -69,7 +69,7 @@ namespace Grupparbete_PolisOchTjuv
             //Grund till Newsfeed/Status
             foreach (Person person in allPersons)
             {
-                Console.WriteLine(person.Icon + ", " + person.CurrentPositionY + " ," + person.CurrentPositionX);
+                Console.WriteLine(person.Icon + ", " + person.CurrentPositionY + " ," + person.CurrentPositionX + "      ");
             }
         }
     }

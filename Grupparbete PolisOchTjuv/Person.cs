@@ -25,10 +25,28 @@ namespace Grupparbete_PolisOchTjuv
 
         public static void PersonMove(List<Person> allPersons) //List inparameter rndMovementX och Y för att göra riktningsädnringar
         {
-            foreach(Person person in allPersons)
+            foreach (Person person in allPersons)
             {
+
                 person.CurrentPositionX += person.MovePositionX;
                 person.CurrentPositionY += person.MovePositionY;
+
+                if (person.CurrentPositionX <= 0)
+                {
+                    person.CurrentPositionX = 100;
+                }
+                else if (person.CurrentPositionX >= 100)
+                {
+                    person.CurrentPositionX = 0;
+                }
+                else if (person.CurrentPositionY <= 0)
+                {
+                    person.CurrentPositionY = 25;
+                }
+                else if (person.CurrentPositionY >= 25)
+                {
+                    person.CurrentPositionY = 0;
+                }
             }
         }
     }

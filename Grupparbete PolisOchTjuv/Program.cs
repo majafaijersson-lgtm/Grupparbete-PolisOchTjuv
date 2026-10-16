@@ -26,18 +26,16 @@ namespace Grupparbete_PolisOchTjuv
 
 
 
-            while(true)
+            while (true)
             {
-                Console.Clear();
-                City.PrintCity(myCity, allPersons);
+                Console.SetCursorPosition(0, 0);
+                Thread.Sleep(250);
                 Person.PersonMove(allPersons);
-                
-
-                Console.ReadKey();
+                City.PrintCity(myCity, allPersons);
 
             }
 
-           
+
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
 
