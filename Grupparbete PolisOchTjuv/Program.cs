@@ -9,10 +9,6 @@ namespace Grupparbete_PolisOchTjuv
 
             City myCity = new City();
 
-            City.PrintCity(myCity);
-
-            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
-
             List<Citizen> citizenList = new List<Citizen>();
             citizenList = Helpers.CreateCitizen();
 
@@ -27,6 +23,12 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(thiefList);
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
+
+            City.PrintCity(myCity, allPersons);
+
+            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
+
+            
 
             foreach (Person person in allPersons)
             {

@@ -17,26 +17,52 @@ namespace Grupparbete_PolisOchTjuv
             Map = new char[Height, Width];
         }
 
-        public static void PrintCity(City myCity)
+        public static void PrintCity(City myCity, List<Person> allPersons)
         {
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
 
             for (int row = 0; row < myCity.Height; row++)
             {
                 for (int col = 0; col < myCity.Width; col++)
                 {
-                    if (col == 0 || col == myCity.Map.GetLength(1) - 1)
+                    if (col == 0 || col == myCity.Width - 1)
                     {
                         Console.Write('X');
                     }
-                    myCity.Map[row, col] = ' ';
-                    Console.Write(myCity.Map[row, col]);
+
+                    else
+                    {
+
+
+                        bool found = false;
+
+                        foreach (Person person in allPersons)
+                        {
+
+                            if (person.CurrentPositionX == col && person.CurrentPositionY == row)
+                            {
+                                Console.Write(person.Icon);
+                                found = true;
+                            }
+                        }
+
+                        if(!found)
+                        {
+                            
+                            Console.Write(' ');
+                        }
+                    }
+          
 
                 }
                 Console.WriteLine();
             }
 
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+         
+
+
+
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
     }
 }
