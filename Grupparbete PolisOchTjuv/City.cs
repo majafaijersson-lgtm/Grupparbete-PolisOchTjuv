@@ -41,8 +41,10 @@ namespace Grupparbete_PolisOchTjuv
 
                             if (person.CurrentPositionX == col && person.CurrentPositionY == row)
                             {
+                                //person.Map[CurrentPsoitionX, CurrentPositionY] = person.Icon;
                                 Console.Write(person.Icon);
                                 found = true;
+                                break;
                             }
                         }
 
@@ -63,6 +65,12 @@ namespace Grupparbete_PolisOchTjuv
 
 
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
+
+            //Grund till Newsfeed/Status
+            foreach (Person person in allPersons)
+            {
+                Console.WriteLine(person.Icon + ", " + person.CurrentPositionY + " ," + person.CurrentPositionX);
+            }
         }
     }
 }

@@ -74,10 +74,10 @@ namespace Grupparbete_PolisOchTjuv
             List<Police> personList = new List<Police>();
             List<string> seizedInventory = new List<string>();
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 6; i++)
             {
-                int rndStartX = Random.Shared.Next(1, 100);
-                int rndStartY = Random.Shared.Next(1, 25);
+                int rndStartX = Random.Shared.Next(2, 99);
+                int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'P';
@@ -96,10 +96,10 @@ namespace Grupparbete_PolisOchTjuv
             List<Thief> personList = new List<Thief>();
             List<string> stolenInventory = new List<string>();
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 11; i++)
             {
-                int rndStartX = Random.Shared.Next(1, 100);
-                int rndStartY = Random.Shared.Next(1, 25);
+                int rndStartX = Random.Shared.Next(2, 99);
+                int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'T';
@@ -117,10 +117,10 @@ namespace Grupparbete_PolisOchTjuv
         {
             List<Citizen> personList = new List<Citizen>();
             List<string> inventory = new List<string>();
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 16; i++)
             {
-                int rndStartX = Random.Shared.Next(1, 100);
-                int rndStartY = Random.Shared.Next(1, 25);
+                int rndStartX = Random.Shared.Next(2, 99);
+                int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'C';

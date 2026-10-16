@@ -24,22 +24,29 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
 
-            City.PrintCity(myCity, allPersons);
-
-            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
-
-            
-
-            foreach (Person person in allPersons)
+            while(true)
             {
-                if(person is Police)
-                {
-                    Console.WriteLine(person.GetType().Name);
-                }
+                Console.Clear();
+                City.PrintCity(myCity, allPersons);
+                Person.PersonMove(allPersons);
+                
+
+                Console.ReadKey();
 
             }
 
-            
+           
+
+            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
+
+            //foreach (Person person in allPersons)
+            //{
+            //    if(person is Police)
+            //    {
+            //        Console.WriteLine(person.GetType().Name);
+            //    }
+
+            //}
 
             //ANropa metod i Helpers
 
