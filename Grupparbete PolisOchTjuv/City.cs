@@ -38,9 +38,11 @@ namespace Grupparbete_PolisOchTjuv
                         {
                             if (person.CurrentPositionX == col && person.CurrentPositionY == row)
                             {
+                                Console.ForegroundColor = person.IconColor;
                                 //person.Map[CurrentPsoitionX, CurrentPositionY] = person.Icon;
                                 Console.Write(person.Icon);
                                 found = true;
+                                Console.ResetColor();
                                 break;
                             }
                         }

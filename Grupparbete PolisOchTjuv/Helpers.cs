@@ -79,7 +79,8 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'P';
-                personList.Add(new Police(GetName(), icon, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
+                ConsoleColor iconColor = ConsoleColor.Blue;
+                personList.Add(new Police(GetName(), icon, iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
                 //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/    
             }
 
@@ -98,7 +99,8 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'T';
-                personList.Add(new Thief(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, stolenInventory));
+                ConsoleColor iconColor = ConsoleColor.Red;
+                personList.Add(new Thief(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, stolenInventory));
             }
             return personList;
         }
@@ -114,7 +116,8 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'C';
-                personList.Add(new Citizen(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
+                ConsoleColor iconColor = ConsoleColor.Green;
+                personList.Add(new Citizen(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
                 inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
             }
 
