@@ -24,18 +24,15 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
 
-
-
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
+                //Console.CursorVisible = false; tar bort flimmret?
                 Thread.Sleep(250);
                 Person.PersonMove(allPersons);
                 City.PrintCity(myCity, allPersons);
 
             }
-
-
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
 
@@ -49,10 +46,6 @@ namespace Grupparbete_PolisOchTjuv
             //}
 
             //ANropa metod i Helpers
-
-
-
-
         }
     }
 }

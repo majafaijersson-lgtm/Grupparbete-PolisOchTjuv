@@ -67,8 +67,6 @@ namespace Grupparbete_PolisOchTjuv
             return Names[rnd];
         }
 
-
-
         public static List<Police> CreatePolice()
         {
             List<Police> personList = new List<Police>();
@@ -82,13 +80,10 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'P';
                 personList.Add(new Police(GetName(), icon, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
-                //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/
-                
+                //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/    
             }
 
             return personList;
-
-
         }
 
         public static List<Thief> CreateThief()
@@ -104,13 +99,8 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 char icon = 'T';
                 personList.Add(new Thief(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, stolenInventory));
-             
-
             }
-
             return personList;
-
-
         }
 
         public static List<Citizen> CreateCitizen()
@@ -126,7 +116,6 @@ namespace Grupparbete_PolisOchTjuv
                 char icon = 'C';
                 personList.Add(new Citizen(GetName(),icon, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
                 inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
-
             }
 
             return personList;

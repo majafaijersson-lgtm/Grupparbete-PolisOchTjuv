@@ -32,13 +32,10 @@ namespace Grupparbete_PolisOchTjuv
 
                     else
                     {
-
-
                         bool found = false;
 
                         foreach (Person person in allPersons)
                         {
-
                             if (person.CurrentPositionX == col && person.CurrentPositionY == row)
                             {
                                 //person.Map[CurrentPsoitionX, CurrentPositionY] = person.Icon;
@@ -54,17 +51,12 @@ namespace Grupparbete_PolisOchTjuv
                             Console.Write(' ');
                         }
                     }
-          
-
                 }
+
                 Console.WriteLine();
             }
 
-         
-
-
-
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
 
             //Grund till Newsfeed/Status
             foreach (Person person in allPersons)

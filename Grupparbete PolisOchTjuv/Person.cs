@@ -59,7 +59,6 @@ namespace Grupparbete_PolisOchTjuv
         {
             Inventory = inventory;
         }
-
     }
 
     class Citizen : Person
