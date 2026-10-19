@@ -25,47 +25,55 @@ namespace Grupparbete_PolisOchTjuv
             MovePositionY = movePositionY;
         }
 
-        public static void PersonMove(List<Person> allPersons) //List inparameter rndMovementX och Y för att göra riktningsädnringar
-        {
-            foreach (Person person in allPersons)
+            public static void PersonMove(List<Person> allPersons) //List inparameter rndMovementX och Y för att göra riktningsädnringar
             {
-
-                person.CurrentPositionX += person.MovePositionX;
-                person.CurrentPositionY += person.MovePositionY;
-
-                if (person.CurrentPositionX <= 0)
+                foreach (Person person in allPersons)
                 {
-                    person.CurrentPositionX = 100;
-                }
-                else if (person.CurrentPositionX >= 100)
-                {
-                    person.CurrentPositionX = 0;
-                }
-                else if (person.CurrentPositionY <= 0)
-                {
-                    person.CurrentPositionY = 25;
-                }
-                else if (person.CurrentPositionY >= 25)
-                {
-                    person.CurrentPositionY = 0;
-                }
-            }
-        }
-    }
 
-    public static void PersonCollision(List<Person> allPersons)
-        {
-            for (int i = 0; i < allPersons.Count; i++)
-            {
-                for (int j = i + 1; j < allPersons.Count; j++)
-                {
-                    if (allPersons[i].CurrentPositionX == allPersons[j].CurrentPositionX && allPersons[i].CurrentPositionY == allPersons[j].CurrentPositionY) ;
+                    person.CurrentPositionX += person.MovePositionX;
+                    person.CurrentPositionY += person.MovePositionY;
 
-
+                    if (person.CurrentPositionX <= 0)
+                    {
+                        person.CurrentPositionX = 100;
+                    }
+                    else if (person.CurrentPositionX >= 100)
+                    {
+                        person.CurrentPositionX = 0;
+                    }
+                    else if (person.CurrentPositionY <= 0)
+                    {
+                        person.CurrentPositionY = 25;
+                    }
+                    else if (person.CurrentPositionY >= 25)
+                    {
+                        person.CurrentPositionY = 0;
+                    }
                 }
             }
 
-        }
+            public static void PersonCollision(List<Person> allPersons)
+                {
+                    for (int i = 0; i < allPersons.Count; i++)
+                    {
+                        for (int j = i + 1; j < allPersons.Count; j++)
+                        {
+                            if (allPersons[i].CurrentPositionX == allPersons[j].CurrentPositionX && allPersons[i].CurrentPositionY == allPersons[j].CurrentPositionY)
+                            {
+                                if (allPersons[i] is Thief && allPersons[j] is Citizen || allPersons[i] is Citizen && allPersons[j] is Thief)
+                                {
+
+                                }
+
+                            }
+
+
+                        }
+                    }
+
+                }
+
+
     class Thief : Person
     {
         public List<string> Inventory { get; set; }
