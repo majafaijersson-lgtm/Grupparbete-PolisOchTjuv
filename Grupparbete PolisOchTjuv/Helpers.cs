@@ -118,8 +118,9 @@ namespace Grupparbete_PolisOchTjuv
                 char icon = 'C';
                 ConsoleColor iconColor = ConsoleColor.Green;
                 personList.Add(new Citizen(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
-                inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
+                
             }
+            inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
 
             return personList;
 
