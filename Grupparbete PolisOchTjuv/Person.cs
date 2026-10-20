@@ -27,7 +27,7 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
         }
 
-        public static void PersonMove(List<Person> allPersons) //List inparameter rndMovementX och Y för att göra riktningsädnringar
+        public static void PersonMove(List<Person> allPersons, Place map) //List inparameter rndMovementX och Y för att göra riktningsädnringar
         {
             foreach (Person person in allPersons)
             {
@@ -37,17 +37,17 @@ namespace Grupparbete_PolisOchTjuv
 
                 if (person.CurrentPositionX <= 0)
                 {
-                    person.CurrentPositionX = 100;
+                    person.CurrentPositionX = map.Width;
                 }
-                else if (person.CurrentPositionX >= 100)
+                else if (person.CurrentPositionX >= map.Width)
                 {
                     person.CurrentPositionX = 0;
                 }
                 else if (person.CurrentPositionY <= 0)
                 {
-                    person.CurrentPositionY = 25;
+                    person.CurrentPositionY = map.Height;
                 }
-                else if (person.CurrentPositionY >= 25)
+                else if (person.CurrentPositionY >= map.Height)
                 {
                     person.CurrentPositionY = 0;
                 }
@@ -73,11 +73,12 @@ namespace Grupparbete_PolisOchTjuv
                                     allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
                                     allPersons[p2].Inventory.RemoveAt(0);
 
-                                    if (allPersons[p2].Inventory.Count == 0)
-                                    {
-                                        poorHouse.Add(allPersons[p2]);
-                                        GeneratePosition(allPersons[p2], 50, 10);
-                                    }
+                                }
+
+                                else if (allPersons[p2].Inventory.Count == 0)
+                                {
+                                    poorHouse.Add(allPersons[p2]);
+                                    GeneratePosition(allPersons[p2], 50, 10);
                                 }
                                 //FUnktion för att hamna i  finkan om invetory <= 0
 
@@ -106,9 +107,9 @@ namespace Grupparbete_PolisOchTjuv
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
                                 allPersons[p2].Inventory.Clear();
+                                GeneratePosition(allPersons[p2], 10, 10);
                                 inmates.Add(allPersons[p2]);
                                 allPersons.RemoveAt(p2);
-                                GeneratePosition(allPersons[p2], 10, 10);
 
 
                             }
@@ -117,9 +118,9 @@ namespace Grupparbete_PolisOchTjuv
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
                                 allPersons[p1].Inventory.Clear();
+                                GeneratePosition(allPersons[p1], 10, 10);
                                 inmates.Add(allPersons[p1]);
                                 allPersons.RemoveAt(p1);
-                                GeneratePosition(allPersons[p1], 10, 10);
 
                                 //FUnktion för att hamna i finkan
 

@@ -36,8 +36,10 @@ namespace Grupparbete_PolisOchTjuv
             {
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
-                Thread.Sleep(400);
-                Person.PersonMove(allPersons);
+                Thread.Sleep(200);
+                Person.PersonMove(allPersons, myCity);
+                Person.PersonMove(inmates, myPrison);
+                Person.PersonMove(poorHouse, myPoorHouse);
                 Person.PersonCollision(allPersons, inmates, poorHouse);
                 Console.WriteLine("CITY");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
