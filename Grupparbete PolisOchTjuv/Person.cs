@@ -124,12 +124,6 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons.RemoveAt(p1);
 
                                 //FUnktion för att hamna i finkan
-
-                            }
-
-                            else
-                            {
-                                Console.WriteLine("tjuv passerar"); 
                             }
                         }
 
