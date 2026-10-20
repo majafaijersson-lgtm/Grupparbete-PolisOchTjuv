@@ -21,7 +21,6 @@ namespace Grupparbete_PolisOchTjuv
         public static void PrintMap(Place myPlace, List<Person> allPersons)
 
         {
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
 
             for (int row = 0; row < myPlace.Height; row++)
             {
@@ -58,9 +57,10 @@ namespace Grupparbete_PolisOchTjuv
                 }
 
                 Console.WriteLine();
+
             }
 
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            
 
             ////Grund till Newsfeed/Status
             //foreach (Person person in allPersons)

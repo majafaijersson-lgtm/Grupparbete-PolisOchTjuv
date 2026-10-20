@@ -54,62 +54,66 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void PersonCollision(List<Person> allPersons)
+        public static void PersonCollision(List<Person> allPersons, List<Person> inmates)
         {
-            for (int i = 0; i < allPersons.Count; i++)
+            for (int p1 = 0; p1 < allPersons.Count; p1++)
             {
-                for (int j = i + 1; j < allPersons.Count; j++)
+                for (int p2 = p1 + 1; p2 < allPersons.Count; p2++)
                 {
-                    if (allPersons[i].CurrentPositionX == allPersons[j].CurrentPositionX && allPersons[i].CurrentPositionY == allPersons[j].CurrentPositionY)
+                    if (allPersons[p1].CurrentPositionX == allPersons[p2].CurrentPositionX && allPersons[p1].CurrentPositionY == allPersons[p2].CurrentPositionY)
                     {
 
-                        if (allPersons[i] is Thief && allPersons[j] is Citizen || allPersons[i] is Citizen && allPersons[j] is Thief)
+                        if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
                         {
-                            if (allPersons[j] is Citizen)
+                            if (allPersons[p2] is Citizen)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
-                                allPersons[i].Inventory.Add(allPersons[j].Inventory[0]);
-                                allPersons[j].Inventory.RemoveAt(0);
-                                Console.WriteLine("HEJ");
+                                allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
+                                allPersons[p2].Inventory.RemoveAt(0);
+                                
                                 //FUnktion för att hamna i  finkan om invetory <= 0
-                                Console.ReadKey();
 
                             }
-                            if (allPersons[i] is Citizen)
+                            if (allPersons[p1] is Citizen)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
-                                allPersons[j].Inventory.Add(allPersons[i].Inventory[0]);
-                                allPersons[i].Inventory.RemoveAt(0);
+                                allPersons[p2].Inventory.Add(allPersons[p1].Inventory[0]);
+                                allPersons[p1].Inventory.RemoveAt(0);
                                 //FUnktion för att hamna i  finkan om invetory <= 0
-                                Console.ReadKey();
 
                             }
 
                         }
 
-                        if (allPersons[i] is Police && allPersons[j] is Thief || allPersons[i] is Thief && allPersons[j] is Police)
+                        if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
-                            if (allPersons[j] is Thief)
+                            if (allPersons[p2] is Thief)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
-                                allPersons[i].Inventory.AddRange(allPersons[j].Inventory);
-                                allPersons[j].Inventory.Clear();
+                                allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
+                                allPersons[p2].Inventory.Clear();
+                                inmates.Add(allPersons[p2]);
+                                allPersons.RemoveAt(p2);
+                                GeneratePosition(allPersons[p2], 10, 10);
+
                                 //FUnktion för att hamna i finkan
-                                Console.ReadKey();
 
                             }
-                            if (allPersons[i] is Thief)
+                            if (allPersons[p1] is Thief)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
-                                allPersons[j].Inventory.AddRange(allPersons[i].Inventory);
-                                allPersons[i].Inventory.Clear();
+                                allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
+                                allPersons[p1].Inventory.Clear();
+                                inmates.Add(allPersons[p1]);
+                                allPersons.RemoveAt(p1);
+                                GeneratePosition(allPersons[p1], 10, 10);
+
                                 //FUnktion för att hamna i finkan
-                                Console.ReadKey();
 
                             }
                         }
 
-                        if (allPersons[i] is Police && allPersons[j] is Citizen || allPersons[i] is Citizen && allPersons[j] is Police)
+                        if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
 
                         }
@@ -121,7 +125,16 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
+        public static void GeneratePosition(Person person, int width, int height)
+        {
+            int rndStartX = Random.Shared.Next(2, width);
+            int rndStartY = Random.Shared.Next(2, height);
+            person.CurrentPositionX = rndStartX;
+            person.CurrentPositionY = rndStartY;
+        }
     }
+
+     
 
         class Thief : Person
         {

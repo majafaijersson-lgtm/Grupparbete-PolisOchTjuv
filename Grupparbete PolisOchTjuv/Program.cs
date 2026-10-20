@@ -8,6 +8,8 @@ namespace Grupparbete_PolisOchTjuv
         {
 
             List<Person> inmates = new List<Person>();
+            List<Person> poorHouse = new List<Person>();
+
 
             City myCity = new City(100, 25);
             Prison myPrison = new Prison(10, 10);
@@ -34,13 +36,25 @@ namespace Grupparbete_PolisOchTjuv
             {
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
                 Person.PersonMove(allPersons);
-                Person.PersonCollision(allPersons);
+                Person.PersonCollision(allPersons, inmates);
+                Console.WriteLine("CITY");
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 Place.PrintMap(myCity, allPersons);
-
-                Console.WriteLine("\n");
-                Prison
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
+                Console.WriteLine("POORHOUSE");
+                Console.WriteLine("--------------------------------------------------");
+                PoorHouse.PrintMap(myPoorHouse, poorHouse);
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine(" ");
+                Console.WriteLine(" ");
+                Console.WriteLine("PRISON");
+                Console.WriteLine("----------");
+                Prison.PrintMap(myPrison, inmates);
+                Console.WriteLine("----------");
             }
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
