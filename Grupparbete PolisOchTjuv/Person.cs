@@ -102,7 +102,7 @@ namespace Grupparbete_PolisOchTjuv
 
                         if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
-                            if (allPersons[p2] is Thief)
+                            if (allPersons[p2] is Thief && allPersons[p2].Inventory.Count > 0)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
@@ -113,7 +113,8 @@ namespace Grupparbete_PolisOchTjuv
 
 
                             }
-                            if (allPersons[p1] is Thief)
+
+                            else if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
@@ -124,6 +125,11 @@ namespace Grupparbete_PolisOchTjuv
 
                                 //FUnktion för att hamna i finkan
 
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("tjuv passerar"); 
                             }
                         }
 
