@@ -54,7 +54,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void PersonCollision(List<Person> allPersons, List<Person> inmates)
+        public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse)
         {
             for (int p1 = 0; p1 < allPersons.Count; p1++)
             {
@@ -67,10 +67,18 @@ namespace Grupparbete_PolisOchTjuv
                         {
                             if (allPersons[p2] is Citizen)
                             {
-                                // Lägg till en random här för att slumpa föremål i lista/inventory
-                                allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
-                                allPersons[p2].Inventory.RemoveAt(0);
-                                
+                                if (allPersons[p2].Inventory.Count > 0)
+                                    {
+                                    // Lägg till en random här för att slumpa föremål i lista/inventory
+                                    allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
+                                    allPersons[p2].Inventory.RemoveAt(0);
+
+                                    if (allPersons[p2].Inventory.Count == 0)
+                                    {
+                                        poorHouse.Add(allPersons[p2]);
+                                        GeneratePosition(allPersons[p2], 50, 10);
+                                    }
+                                }
                                 //FUnktion för att hamna i  finkan om invetory <= 0
 
                             }
@@ -79,6 +87,12 @@ namespace Grupparbete_PolisOchTjuv
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[p2].Inventory.Add(allPersons[p1].Inventory[0]);
                                 allPersons[p1].Inventory.RemoveAt(0);
+
+                                if (allPersons[p1].Inventory.Count == 0)
+                                {
+                                    poorHouse.Add(allPersons[p1]);
+                                    GeneratePosition(allPersons[p1], 50, 10);
+                                }
                                 //FUnktion för att hamna i  finkan om invetory <= 0
 
                             }
@@ -96,7 +110,6 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons.RemoveAt(p2);
                                 GeneratePosition(allPersons[p2], 10, 10);
 
-                                //FUnktion för att hamna i finkan
 
                             }
                             if (allPersons[p1] is Thief)
