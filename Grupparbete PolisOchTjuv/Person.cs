@@ -70,22 +70,43 @@ namespace Grupparbete_PolisOchTjuv
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[i].Inventory.Add(allPersons[j].Inventory[0]);
                                 allPersons[j].Inventory.RemoveAt(0);
-                                
+                                Console.WriteLine("HEJ");
+                                //FUnktion för att hamna i  finkan om invetory <= 0
+                                Console.ReadKey();
+
                             }
                             if (allPersons[i] is Citizen)
                             {
                                 // Lägg till en random här för att slumpa föremål i lista/inventory
                                 allPersons[j].Inventory.Add(allPersons[i].Inventory[0]);
                                 allPersons[i].Inventory.RemoveAt(0);
+                                //FUnktion för att hamna i  finkan om invetory <= 0
+                                Console.ReadKey();
 
                             }
-
 
                         }
 
                         if (allPersons[i] is Police && allPersons[j] is Thief || allPersons[i] is Thief && allPersons[j] is Police)
                         {
+                            if (allPersons[j] is Thief)
+                            {
+                                // Lägg till en random här för att slumpa föremål i lista/inventory
+                                allPersons[i].Inventory.AddRange(allPersons[j].Inventory);
+                                allPersons[j].Inventory.Clear();
+                                //FUnktion för att hamna i finkan
+                                Console.ReadKey();
 
+                            }
+                            if (allPersons[i] is Thief)
+                            {
+                                // Lägg till en random här för att slumpa föremål i lista/inventory
+                                allPersons[j].Inventory.AddRange(allPersons[i].Inventory);
+                                allPersons[i].Inventory.Clear();
+                                //FUnktion för att hamna i finkan
+                                Console.ReadKey();
+
+                            }
                         }
 
                         if (allPersons[i] is Police && allPersons[j] is Citizen || allPersons[i] is Citizen && allPersons[j] is Police)
@@ -94,7 +115,6 @@ namespace Grupparbete_PolisOchTjuv
                         }
 
                     }
-
 
                 }
             }
@@ -105,8 +125,6 @@ namespace Grupparbete_PolisOchTjuv
 
         class Thief : Person
         {
-            public List<string> Inventory { get; set; }
-
             public Thief(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
                 Inventory = inventory;
@@ -115,8 +133,6 @@ namespace Grupparbete_PolisOchTjuv
 
         class Citizen : Person
         {
-            public List<string> Inventory { get; set; }
-
             public Citizen(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
                 Inventory = inventory;
@@ -125,8 +141,6 @@ namespace Grupparbete_PolisOchTjuv
 
         class Police : Person
         {
-            public List<string> Inventory { get; set; }
-
             public Police(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
                 Inventory = inventory;

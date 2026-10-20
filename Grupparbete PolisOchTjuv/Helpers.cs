@@ -70,7 +70,6 @@ namespace Grupparbete_PolisOchTjuv
         public static List<Police> CreatePolice()
         {
             List<Police> personList = new List<Police>();
-            List<string> seizedInventory = new List<string>();
 
             for (int i = 1; i < 6; i++)
             {
@@ -78,6 +77,7 @@ namespace Grupparbete_PolisOchTjuv
                 int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
+                List<string> seizedInventory = new List<string>();
                 char icon = 'P';
                 ConsoleColor iconColor = ConsoleColor.Blue;
                 personList.Add(new Police(GetName(), icon, iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
@@ -90,7 +90,7 @@ namespace Grupparbete_PolisOchTjuv
         public static List<Thief> CreateThief()
         {
             List<Thief> personList = new List<Thief>();
-            List<string> stolenInventory = new List<string>();
+            
 
             for (int i = 1; i < 11; i++)
             {
@@ -98,6 +98,7 @@ namespace Grupparbete_PolisOchTjuv
                 int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
+                List<string> stolenInventory = new List<string>();
                 char icon = 'T';
                 ConsoleColor iconColor = ConsoleColor.Red;
                 personList.Add(new Thief(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, stolenInventory));
@@ -108,20 +109,20 @@ namespace Grupparbete_PolisOchTjuv
         public static List<Citizen> CreateCitizen()
         {
             List<Citizen> personList = new List<Citizen>();
-            List<string> inventory = new List<string>();
+            
             for (int i = 1; i < 16; i++)
             {
                 int rndStartX = Random.Shared.Next(2, 99);
                 int rndStartY = Random.Shared.Next(2, 24);
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
+                List<string> inventory = new List<string>();
+                inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
                 char icon = 'C';
                 ConsoleColor iconColor = ConsoleColor.Green;
                 personList.Add(new Citizen(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
                 
             }
-            inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
-
             return personList;
 
 
