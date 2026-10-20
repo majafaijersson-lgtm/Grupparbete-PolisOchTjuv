@@ -7,7 +7,13 @@ namespace Grupparbete_PolisOchTjuv
         static void Main(string[] args)
         {
 
-            City myCity = new City();
+            List<Person> inmates = new List<Person>();
+
+            City myCity = new City(100, 25);
+            Prison myPrison = new Prison(10, 10);
+            PoorHouse myPoorHouse = new PoorHouse(50, 10); 
+
+            
 
             List<Citizen> citizenList = new List<Citizen>();
             citizenList = Helpers.CreateCitizen();
@@ -31,8 +37,10 @@ namespace Grupparbete_PolisOchTjuv
                 Thread.Sleep(100);
                 Person.PersonMove(allPersons);
                 Person.PersonCollision(allPersons);
-                City.PrintCity(myCity, allPersons);
+                Place.PrintMap(myCity, allPersons);
 
+                Console.WriteLine("\n");
+                Prison
             }
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
