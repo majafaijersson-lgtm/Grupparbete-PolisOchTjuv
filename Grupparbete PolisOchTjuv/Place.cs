@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Grupparbete_PolisOchTjuv
@@ -60,13 +61,53 @@ namespace Grupparbete_PolisOchTjuv
 
             }
 
-            
-
+  
             ////Grund till Newsfeed/Status
             //foreach (Person person in allPersons)
             //{
             //    Console.WriteLine(person.Icon + ", " + person.CurrentPositionY + " ," + person.CurrentPositionX + "      ");
             //}
+        }
+
+        public static void PrintStatus(List<Person> allPersons, int nrOfCitizen, int nrOfPolice, int nrOfThieves)
+        {
+
+            int citizen = 0;
+            int police = 0;
+            int thief = 0;
+
+            foreach (Person person in allPersons)
+            {
+                if(person is Citizen)
+                {
+                    citizen++;
+                }
+                if(person is Police)
+                {
+                    police++;
+                }
+                if(person is Thief)
+                {
+                    thief++;
+                }  
+            }
+
+            Console.WriteLine($"Of {nrOfCitizen} citizens, {citizen} remain in the city.");
+            Console.WriteLine($"Of {nrOfThieves} thieves, {thief} remain in the city.");
+            Console.WriteLine($"There are {nrOfPolice} police in the city.");
+
+        }
+
+        public static void PrintNewsFeed(List<string> newsFeed)
+        {
+            // Poliser, C och T som tillkommer.
+            // T som hamnar i finkan
+            // T som kommer ut från finkan
+            // C som hamnar i PH
+            // C som kommer ut från PH?
+            // T rånar C på item
+            // De som hejar på varandra.
+
         }
     }
 

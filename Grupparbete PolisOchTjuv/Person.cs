@@ -55,6 +55,30 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
+        public static void SayHello(Person p1, Person p2)
+        {
+            if (p1 is Citizen && p2 is Citizen) //C säger hej till C
+            {
+                Console.WriteLine($"{p1.GetType().Name} säger hej till {p2.GetType().Name} !");
+            }
+
+            else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
+                     (p1 is Police && p2 is Citizen))
+            {
+                Console.WriteLine($"{p1.GetType().Name} säger hej till {p2.GetType().Name}!");
+            }
+
+            else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
+            {
+                Console.WriteLine("Police säger hej till Thief!");
+            }
+            else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
+            {
+                Console.WriteLine("Thief säger hej till Police!");
+            }
+        }
+
+
         public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue newsFeed)
         {
             for (int p1 = 0; p1 < allPersons.Count; p1++)
@@ -63,9 +87,11 @@ namespace Grupparbete_PolisOchTjuv
                 {
                     if (allPersons[p1].CurrentPositionX == allPersons[p2].CurrentPositionX && allPersons[p1].CurrentPositionY == allPersons[p2].CurrentPositionY)
                     {
+                        //SayHello(allPersons[p1], allPersons[p2]);
 
                         if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
                         {
+                            
                             if (allPersons[p2] is Citizen)
                             {
                                 if (allPersons[p2].Inventory.Count > 0)
@@ -78,10 +104,14 @@ namespace Grupparbete_PolisOchTjuv
 
                                 else if (allPersons[p2].Inventory.Count == 0)
                                 {
-                                    poorHouse.Add(allPersons[p2]);
                                     GeneratePosition(allPersons[p2], 50, 10);
+                                    poorHouse.Add(allPersons[p2]);
+                                    allPersons.RemoveAt(p2);
+                                  
                                 }
                                 //FUnktion för att hamna i  finkan om invetory <= 0
+
+                                //newsFeed.Enqueue($"{allPersons[p2].GetType().Name} {allPersons[p2].Name} ")
 
                             }
                             if (allPersons[p1] is Citizen)
@@ -131,12 +161,13 @@ namespace Grupparbete_PolisOchTjuv
                         if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
                             
-                            newsFeed.Enqueue("Polis mötte invånare");
+                          
                         }
 
                     }
 
                 }
+
             }
 
         }

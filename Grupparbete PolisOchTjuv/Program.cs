@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Grupparbete_PolisOchTjuv
 {
@@ -11,14 +12,12 @@ namespace Grupparbete_PolisOchTjuv
             List<Person> inmates = new List<Person>();
             List<Person> poorHouse = new List<Person>();
 
+            Queue newsFeed = new Queue();
+
 
             City myCity = new City(100, 25);
             Prison myPrison = new Prison(10, 10);
             PoorHouse myPoorHouse = new PoorHouse(50, 10);
-
-            Queue newsFeed = new Queue();
-
-            
 
             List<Citizen> citizenList = new List<Citizen>();
             citizenList = Helpers.CreateCitizen();
@@ -35,6 +34,11 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
             Console.ReadKey(true);
+
+            int nrOfCitizen = citizenList.Count;
+            int nrOfPolice = policeList.Count;
+            int nrOfThieves = thiefList.Count;
+
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
@@ -61,7 +65,12 @@ namespace Grupparbete_PolisOchTjuv
                 Prison.PrintMap(myPrison, inmates);
                 Console.WriteLine("----------");
                 Console.WriteLine();
-                Helpers.PrintLatestActions(newsFeed);
+                Console.WriteLine("STATUS:");
+                Place.PrintStatus(allPersons, nrOfCitizen, nrOfPolice, nrOfThieves);
+                Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                Console.WriteLine("NEWS FEED:");
+                //ANropa metod NF
+
             }
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn

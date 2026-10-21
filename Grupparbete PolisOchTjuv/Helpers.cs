@@ -129,15 +129,5 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
-        public static void PrintLatestActions(Queue newsFeed)
-        {
-            if (newsFeed != null)
-            {
-                Console.WriteLine(newsFeed.Peek());
-            }
-        }
-
-
-
     }
 }
