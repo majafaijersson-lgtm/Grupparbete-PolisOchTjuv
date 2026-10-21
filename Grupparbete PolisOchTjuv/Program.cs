@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 
 namespace Grupparbete_PolisOchTjuv
 {
@@ -13,7 +14,9 @@ namespace Grupparbete_PolisOchTjuv
 
             City myCity = new City(100, 25);
             Prison myPrison = new Prison(10, 10);
-            PoorHouse myPoorHouse = new PoorHouse(50, 10); 
+            PoorHouse myPoorHouse = new PoorHouse(50, 10);
+
+            Queue newsFeed = new Queue();
 
             
 
@@ -31,16 +34,16 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(thiefList);
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
-
+            Console.ReadKey(true);
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
-                Thread.Sleep(800);
+                //Thread.Sleep(800);
                 Person.PersonMove(allPersons, myCity);
                 Person.PersonMove(inmates, myPrison);
                 Person.PersonMove(poorHouse, myPoorHouse);
-                Person.PersonCollision(allPersons, inmates, poorHouse);
+                Person.PersonCollision(allPersons, inmates, poorHouse, newsFeed);
                 Console.WriteLine("CITY");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 Place.PrintMap(myCity, allPersons);
@@ -57,6 +60,8 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("----------");
                 Prison.PrintMap(myPrison, inmates);
                 Console.WriteLine("----------");
+                Console.WriteLine();
+                Helpers.PrintLatestActions(newsFeed);
             }
 
             //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn

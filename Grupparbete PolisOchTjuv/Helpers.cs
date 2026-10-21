@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
@@ -71,7 +72,7 @@ namespace Grupparbete_PolisOchTjuv
         {
             List<Police> personList = new List<Police>();
 
-            for (int i = 1; i < 6; i++)
+            for (int i = 1; i < 12; i++)
             {
                 int rndStartX = Random.Shared.Next(2, 99);
                 int rndStartY = Random.Shared.Next(2, 24);
@@ -92,7 +93,7 @@ namespace Grupparbete_PolisOchTjuv
             List<Thief> personList = new List<Thief>();
             
 
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 38; i++)
             {
                 int rndStartX = Random.Shared.Next(2, 99);
                 int rndStartY = Random.Shared.Next(2, 24);
@@ -110,7 +111,7 @@ namespace Grupparbete_PolisOchTjuv
         {
             List<Citizen> personList = new List<Citizen>();
             
-            for (int i = 1; i < 16; i++)
+            for (int i = 1; i < 28; i++)
             {
                 int rndStartX = Random.Shared.Next(2, 99);
                 int rndStartY = Random.Shared.Next(2, 24);
@@ -127,6 +128,15 @@ namespace Grupparbete_PolisOchTjuv
 
 
         }
+
+        public static void PrintLatestActions(Queue newsFeed)
+        {
+            if (newsFeed != null)
+            {
+                Console.WriteLine(newsFeed.Peek());
+            }
+        }
+
 
 
     }

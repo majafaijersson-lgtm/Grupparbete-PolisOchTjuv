@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -54,7 +55,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse)
+        public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue newsFeed)
         {
             for (int p1 = 0; p1 < allPersons.Count; p1++)
             {
@@ -129,7 +130,8 @@ namespace Grupparbete_PolisOchTjuv
 
                         if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
-
+                            
+                            newsFeed.Enqueue("Polis mötte invånare");
                         }
 
                     }
