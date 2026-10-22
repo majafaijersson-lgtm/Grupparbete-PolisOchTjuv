@@ -191,6 +191,34 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
+        public static void AddPerson(List<Person> allPersons, char key)
+        {
+            switch(key)
+            {
+
+                case 'p':
+                    List<Police> newPolice = Helpers.CreatePolice();
+                    allPersons.Add(newPolice[0]);
+                    break;
+
+                case 'c':
+                    List<Citizen> newCitizen = Helpers.CreateCitizen();
+                    allPersons.Add(newCitizen[0]);
+                    break;
+
+                case 't':
+                    List<Thief> newThief = Helpers.CreateThief();
+                    allPersons.Add(newThief[0]);
+                    break;
+
+                case 'v': // Ändra vy
+
+                    break;
+
+
+            }
+        }
+
         public static void GeneratePosition(Person person, int width, int height)
         {
             int rndStartX = Random.Shared.Next(2, width);

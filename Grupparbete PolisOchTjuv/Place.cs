@@ -63,7 +63,7 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
-        public static void PrintStatus(List<Person> allPersons, int nrOfCitizen, int nrOfPolice, int nrOfThieves)
+        public static void PrintStatus(List<Person> allPersons, List<Citizen> citizenList, List<Police> policeList, List<Thief> thiefList)
         {
 
             int citizen = 0;
@@ -86,9 +86,9 @@ namespace Grupparbete_PolisOchTjuv
                 }  
             }
 
-            Console.WriteLine($"Of {nrOfCitizen} citizens, {citizen} remain in the city.");
-            Console.WriteLine($"Of {nrOfThieves} thieves, {thief} remain in the city.");
-            Console.WriteLine($"There are {nrOfPolice} police in the city.");
+            Console.WriteLine($"Of {citizen} citizens, {citizen} remain in the city.");
+            Console.WriteLine($"Of {thief} thieves, {thief} remain in the city.");
+            Console.WriteLine($"There are {police} police in the city.");
 
         }
 

@@ -36,13 +36,20 @@ namespace Grupparbete_PolisOchTjuv
             allPersons.AddRange(citizenList);
             Console.ReadKey(true);
 
-            int nrOfCitizen = citizenList.Count;
-            int nrOfPolice = policeList.Count;
-            int nrOfThieves = thiefList.Count;
+            //int nrOfCitizen = citizenList.Count;
+            //int nrOfPolice = policeList.Count;
+            //int nrOfThieves = thiefList.Count;
             int newsNumber = 1;
 
             while (true)
             {
+                if(Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    char input = (char)key.KeyChar;
+
+                    Person.AddPerson(allPersons, input);
+                }
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
                 Thread.Sleep(800);
@@ -68,7 +75,7 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("----------");
                 Console.WriteLine();
                 Console.WriteLine("STATUS:");
-               Place.PrintStatus(allPersons, nrOfCitizen, nrOfPolice, nrOfThieves);
+               Place.PrintStatus(allPersons, citizenList, policeList, thiefList);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 //Console.WriteLine("NEWS FEED:");
                 //Place.PrintNewsFeed(newsFeed, newsNumber);
