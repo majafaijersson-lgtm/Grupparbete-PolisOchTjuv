@@ -45,11 +45,11 @@ namespace Grupparbete_PolisOchTjuv
             {
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
-                //Thread.Sleep(800);
+                Thread.Sleep(800);
                 Person.PersonMove(allPersons, myCity);
                 Person.PersonMove(inmates, myPrison);
                 Person.PersonMove(poorHouse, myPoorHouse);
-                Person.PersonCollision(allPersons, inmates, poorHouse, newsFeed);
+                newsNumber = Person.PersonCollision(allPersons, inmates, poorHouse, newsFeed, newsNumber);
                 Console.WriteLine("CITY");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 Place.PrintMap(myCity, allPersons);
@@ -68,11 +68,11 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("----------");
                 Console.WriteLine();
                 Console.WriteLine("STATUS:");
-                Place.PrintStatus(allPersons, nrOfCitizen, nrOfPolice, nrOfThieves);
+               Place.PrintStatus(allPersons, nrOfCitizen, nrOfPolice, nrOfThieves);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 //Console.WriteLine("NEWS FEED:");
                 //Place.PrintNewsFeed(newsFeed, newsNumber);
-                newsNumber = Place.PrintNewsFeed(newsFeed, newsNumber);
+/*                newsNumber = */Place.PrintNewsFeed(newsFeed);
 
             }
 

@@ -55,31 +55,37 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void SayHello(Person p1, Person p2, Queue<string> newsFeed)
+        public static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
         {
             if (p1 is Citizen && p2 is Citizen) //C säger hej till C
             {
-                Place.AddNewsFeed(newsFeed, ($"{p1.GetType().Name} says hello to {p2.GetType().Name} !"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} says hello to {p2.GetType().Name} !"));
+                newsNumber++;
             }
 
             else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
                      (p1 is Police && p2 is Citizen))
             {
-                Place.AddNewsFeed(newsFeed, ($"{p1.GetType().Name} sayas hello to {p2.GetType().Name}!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} sayas hello to {p2.GetType().Name}!"));
+                newsNumber++;
             }
 
             else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
             {
-                Place.AddNewsFeed(newsFeed, ("Police says hello to Thief!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Police says hello to Thief!"));
+                newsNumber++;
             }
             else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
             {
-                Place.AddNewsFeed(newsFeed, ("Thief says hello to Police!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief says hello to Police!"));
+                newsNumber++;
+
             }
+            return newsNumber;
         }
 
 
-        public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed)
+        public static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
         {
             for (int p1 = 0; p1 < allPersons.Count -1; p1++)
             {
@@ -94,20 +100,22 @@ namespace Grupparbete_PolisOchTjuv
                                 if (allPersons[p2].Inventory.Count > 0)
                                     {
                                     // Lägg till en random här för att slumpa föremål i lista/inventory
-                                    Place.AddNewsFeed(newsFeed, ($"Thief {allPersons[p1].Name} stole {allPersons[p2].Inventory[0]} from citizen {allPersons[p2].Name}."));
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} stole {allPersons[p2].Inventory[0]} from citizen {allPersons[p2].Name}."));
                                     allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
                                     allPersons[p2].Inventory.RemoveAt(0);
-
+                                    newsNumber++;
                                 }
 
                                 if (allPersons[p2].Inventory.Count == 0)
                                 {
                                     GeneratePosition(allPersons[p2], 50, 10);
-                                    Place.AddNewsFeed(newsFeed, ($"Citizen {allPersons[p2].Name} was sent to poorhouse"));
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
                                     poorHouse.Add(allPersons[p2]);
                                     allPersons.RemoveAt(p2);
-                                  
+                                    newsNumber++;
+
                                 }
+                                //newsNumber++;
 
                             }
                             if (allPersons[p1] is Citizen)
@@ -115,22 +123,24 @@ namespace Grupparbete_PolisOchTjuv
                                 if (allPersons[p1].Inventory.Count > 0)
                                 {
                                     // Lägg till en random här för att slumpa föremål i lista/inventory
-                                    Place.AddNewsFeed(newsFeed, ($"Thief {allPersons[p2].Name} stole {allPersons[p1].Inventory[0]} from citizen {allPersons[p1].Name}."));
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} stole {allPersons[p1].Inventory[0]} from citizen {allPersons[p1].Name}."));
                                     allPersons[p2].Inventory.Add(allPersons[p1].Inventory[0]);
                                     allPersons[p1].Inventory.RemoveAt(0);
+                                    newsNumber++;
 
                                 }
 
                                 if (allPersons[p1].Inventory.Count == 0)
                                 {
                                     GeneratePosition(allPersons[p1], 50, 10);
-                                    Place.AddNewsFeed(newsFeed, ($"Citizen {allPersons[p2].Name} was sent to poorhouse"));
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
                                     poorHouse.Add(allPersons[p1]);
                                     allPersons.RemoveAt(p2);
+                                    newsNumber++;
                                 }
-
+                                //newsNumber++;
                             }
-
+                            
                         }
 
                         if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
@@ -142,13 +152,14 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
                                 allPersons[p2].Inventory.Clear();
                                 GeneratePosition(allPersons[p2], 10, 10);
-                                Place.AddNewsFeed(newsFeed, ($"Thief {allPersons[p2].Name} was sent to jail"));
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} was sent to jail"));
                                 inmates.Add(allPersons[p2]);
                                 allPersons.RemoveAt(p2);
+                                newsNumber++;
                             }
                             else if (allPersons[p2].Inventory.Count == 0)
                             {
-                                SayHello(allPersons[p1], allPersons[p2], newsFeed);
+                                SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
                             }
 
                             if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
@@ -157,28 +168,27 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
                                 allPersons[p1].Inventory.Clear();
                                 GeneratePosition(allPersons[p1], 10, 10);
-                                Place.AddNewsFeed(newsFeed, ($"Thief {allPersons[p1].Name} was sent to jail"));
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} was sent to jail"));
                                 inmates.Add(allPersons[p1]);
                                 allPersons.RemoveAt(p1);
+                                newsNumber++;
                             }
                             else if (allPersons[p2].Inventory.Count == 0)
                             {
-                                SayHello(allPersons[p1], allPersons[p2], newsFeed);
+                                SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
                             }
                         }
 
                         if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
-                            
-                          
-                        }
+                            SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
 
+                        } 
                     }
-
                 }
-
+                
             }
-
+            return newsNumber;
         }
 
         public static void GeneratePosition(Person person, int width, int height)

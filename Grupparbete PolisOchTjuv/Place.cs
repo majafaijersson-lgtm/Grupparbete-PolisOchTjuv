@@ -101,29 +101,20 @@ namespace Grupparbete_PolisOchTjuv
                 newsFeed.Dequeue();
             }
 
-            //ANropa metod med AddToNewsFeed("texten som du vill spara");
-            //gör anrop till metoden inuti personCollision?
-
             // Poliser, C och T som tillkommer.
             // T som kommer ut från finkan
             // C som kommer ut från PH?
-            // De som hejar på varandra.
-
-
         }
 
-        public static int PrintNewsFeed(Queue<string> newsFeed, int newsNumber)
+        public static void PrintNewsFeed(Queue<string> newsFeed)
         {
 
             Console.WriteLine("NEWS FEED");
 
-            foreach (string text in newsFeed) //Kan man reversera utskriften? Omvänd for-loop? reverse-metod?
+            foreach (string text in newsFeed.Reverse()) //Kan man reversera utskriften? Omvänd for-loop? reverse-metod?
             {
-                Console.WriteLine(newsNumber + ". " + text);
-                newsNumber++;
-
+                Console.WriteLine(text); //Ändra newsnumber. Ta bort?
             }
-            return newsNumber;
         }
     }
 
