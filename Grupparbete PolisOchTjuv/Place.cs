@@ -61,12 +61,6 @@ namespace Grupparbete_PolisOchTjuv
 
             }
 
-  
-            ////Grund till Newsfeed/Status
-            //foreach (Person person in allPersons)
-            //{
-            //    Console.WriteLine(person.Icon + ", " + person.CurrentPositionY + " ," + person.CurrentPositionX + "      ");
-            //}
         }
 
         public static void PrintStatus(List<Person> allPersons, int nrOfCitizen, int nrOfPolice, int nrOfThieves)
@@ -98,11 +92,8 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
-        public static void PrintNewsFeed(string news)
+        public static void AddNewsFeed(Queue<string> newsFeed, string news)
         {
-
-            Queue<string> newsFeed = new Queue<string>();
-
             newsFeed.Enqueue(news); //lägger till string sist i "kön". string news från main(ej tillagt ännu)
 
             if (newsFeed.Count > 5) //Om Newsfeed är > 5 så tas det äldsta elementet bort?
@@ -114,19 +105,25 @@ namespace Grupparbete_PolisOchTjuv
             //gör anrop till metoden inuti personCollision?
 
             // Poliser, C och T som tillkommer.
-            // T som hamnar i finkan
             // T som kommer ut från finkan
-            // C som hamnar i PH
             // C som kommer ut från PH?
-            // T rånar C på item
             // De som hejar på varandra.
+
+
+        }
+
+        public static int PrintNewsFeed(Queue<string> newsFeed, int newsNumber)
+        {
 
             Console.WriteLine("NEWS FEED");
 
             foreach (string text in newsFeed) //Kan man reversera utskriften? Omvänd for-loop? reverse-metod?
             {
-                Console.WriteLine(text);
+                Console.WriteLine(newsNumber + ". " + text);
+                newsNumber++;
+
             }
+            return newsNumber;
         }
     }
 

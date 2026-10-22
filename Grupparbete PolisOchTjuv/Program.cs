@@ -12,7 +12,8 @@ namespace Grupparbete_PolisOchTjuv
             List<Person> inmates = new List<Person>();
             List<Person> poorHouse = new List<Person>();
 
-            Queue newsFeed = new Queue();
+     
+            Queue<string> newsFeed = new Queue<string>();
 
 
             City myCity = new City(100, 25);
@@ -38,6 +39,7 @@ namespace Grupparbete_PolisOchTjuv
             int nrOfCitizen = citizenList.Count;
             int nrOfPolice = policeList.Count;
             int nrOfThieves = thiefList.Count;
+            int newsNumber = 1;
 
             while (true)
             {
@@ -68,23 +70,12 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("STATUS:");
                 Place.PrintStatus(allPersons, nrOfCitizen, nrOfPolice, nrOfThieves);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                Console.WriteLine("NEWS FEED:");
-                //ANropa metod NF
+                //Console.WriteLine("NEWS FEED:");
+                //Place.PrintNewsFeed(newsFeed, newsNumber);
+                newsNumber = Place.PrintNewsFeed(newsFeed, newsNumber);
 
             }
 
-            //Console.WriteLine(Helpers.GetName()); //skriver ut ett randomiserat namn
-
-            //foreach (Person person in allPersons)
-            //{
-            //    if(person is Police)
-            //    {
-            //        Console.WriteLine(person.GetType().Name);
-            //    }
-
-            //}
-
-            //ANropa metod i Helpers
         }
     }
 }
