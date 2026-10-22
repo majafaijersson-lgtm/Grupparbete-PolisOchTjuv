@@ -81,9 +81,9 @@ namespace Grupparbete_PolisOchTjuv
 
         public static void PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue newsFeed)
         {
-            for (int p1 = 0; p1 < allPersons.Count; p1++)
+            for (int p1 = 0; p1 < allPersons.Count -1; p1++)
             {
-                for (int p2 = p1 + 1; p2 < allPersons.Count; p2++)
+                for (int p2 = p1 + 1; p2 < allPersons.Count -1; p2++)
                 {
                     if (allPersons[p1].CurrentPositionX == allPersons[p2].CurrentPositionX && allPersons[p1].CurrentPositionY == allPersons[p2].CurrentPositionY)
                     {
