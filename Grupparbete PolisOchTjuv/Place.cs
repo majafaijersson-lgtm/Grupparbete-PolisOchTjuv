@@ -98,8 +98,21 @@ namespace Grupparbete_PolisOchTjuv
 
         }
 
-        public static void PrintNewsFeed(List<string> newsFeed)
+        public static void PrintNewsFeed(string news)
         {
+
+            Queue<string> newsFeed = new Queue<string>();
+
+            newsFeed.Enqueue(news); //lägger till string sist i "kön". string news från main(ej tillagt ännu)
+
+            if (newsFeed.Count > 5) //Om Newsfeed är > 5 så tas det äldsta elementet bort?
+            {
+                newsFeed.Dequeue();
+            }
+
+            //ANropa metod med AddToNewsFeed("texten som du vill spara");
+            //gör anrop till metoden inuti personCollision?
+
             // Poliser, C och T som tillkommer.
             // T som hamnar i finkan
             // T som kommer ut från finkan
@@ -108,6 +121,12 @@ namespace Grupparbete_PolisOchTjuv
             // T rånar C på item
             // De som hejar på varandra.
 
+            Console.WriteLine("NEWS FEED");
+
+            foreach (string text in newsFeed) //Kan man reversera utskriften? Omvänd for-loop? reverse-metod?
+            {
+                Console.WriteLine(text);
+            }
         }
     }
 

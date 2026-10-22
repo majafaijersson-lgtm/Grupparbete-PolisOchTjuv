@@ -105,6 +105,7 @@ namespace Grupparbete_PolisOchTjuv
                                 else if (allPersons[p2].Inventory.Count == 0)
                                 {
                                     GeneratePosition(allPersons[p2], 50, 10);
+                                    Place.PrintNewsFeed($"Citizen {allPersons[p2].Name} was sent to poorhouse");
                                     poorHouse.Add(allPersons[p2]);
                                     allPersons.RemoveAt(p2);
                                   
@@ -122,10 +123,11 @@ namespace Grupparbete_PolisOchTjuv
 
                                 if (allPersons[p1].Inventory.Count == 0)
                                 {
-                                    poorHouse.Add(allPersons[p1]);
                                     GeneratePosition(allPersons[p1], 50, 10);
+                                    Place.PrintNewsFeed($"Citizen {allPersons[p2].Name} was sent to poorhouse");
+                                    poorHouse.Add(allPersons[p1]);
+                                    allPersons.RemoveAt(p2);
                                 }
-                                //FUnktion för att hamna i  finkan om invetory <= 0
 
                             }
 
@@ -139,10 +141,9 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
                                 allPersons[p2].Inventory.Clear();
                                 GeneratePosition(allPersons[p2], 10, 10);
+                                Place.PrintNewsFeed($"Thief {allPersons[p2].Name} was sent to jail");
                                 inmates.Add(allPersons[p2]);
                                 allPersons.RemoveAt(p2);
-
-
                             }
 
                             else if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
@@ -151,6 +152,7 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
                                 allPersons[p1].Inventory.Clear();
                                 GeneratePosition(allPersons[p1], 10, 10);
+                                Place.PrintNewsFeed($"Thief {allPersons[p1].Name} was sent to jail");
                                 inmates.Add(allPersons[p1]);
                                 allPersons.RemoveAt(p1);
 
