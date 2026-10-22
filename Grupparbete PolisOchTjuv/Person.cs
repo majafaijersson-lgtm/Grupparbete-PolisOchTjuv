@@ -89,7 +89,7 @@ namespace Grupparbete_PolisOchTjuv
         {
             for (int p1 = 0; p1 < allPersons.Count -1; p1++)
             {
-                for (int p2 = p1 + 1; p2 < allPersons.Count -1; p2++)
+                for (int p2 = p1 + 1; p2 < allPersons.Count; p2++) // -1?
                 {
                     if (allPersons[p1].CurrentPositionX == allPersons[p2].CurrentPositionX && allPersons[p1].CurrentPositionY == allPersons[p2].CurrentPositionY)
                     {
@@ -159,7 +159,7 @@ namespace Grupparbete_PolisOchTjuv
                             }
                             else if (allPersons[p2].Inventory.Count == 0)
                             {
-                                SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
+                                newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT
                             }
 
                             if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
@@ -173,15 +173,15 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons.RemoveAt(p1);
                                 newsNumber++;
                             }
-                            else if (allPersons[p2].Inventory.Count == 0)
+                            else if (allPersons[p1].Inventory.Count == 0)
                             {
-                                SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
+                                newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
                             }
                         }
 
                         if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
-                            SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber);
+                            newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
 
                         } 
                     }
@@ -225,4 +225,4 @@ namespace Grupparbete_PolisOchTjuv
                 Inventory = inventory;
             }
         }
-    }
+}
