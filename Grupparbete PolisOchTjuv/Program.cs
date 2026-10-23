@@ -10,11 +10,9 @@ namespace Grupparbete_PolisOchTjuv
         {
 
             List<Person> inmates = new List<Person>();
-            List<Person> poorHouse = new List<Person>();
+            List<Person> poorPeople = new List<Person>();
 
-     
             Queue<string> newsFeed = new Queue<string>();
-
 
             City myCity = new City(100, 25);
             Prison myPrison = new Prison(10, 10);
@@ -45,7 +43,7 @@ namespace Grupparbete_PolisOchTjuv
 
             while (true)
             {
-                if(Console.KeyAvailable)
+                if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     char input = (char)key.KeyChar;
@@ -57,8 +55,9 @@ namespace Grupparbete_PolisOchTjuv
                 Thread.Sleep(100);
                 Person.PersonMove(allPersons, myCity);
                 Person.PersonMove(inmates, myPrison);
-                Person.PersonMove(poorHouse, myPoorHouse);
-                newsNumber = Person.PersonCollision(allPersons, inmates, poorHouse, newsFeed, newsNumber);
+                Person.PersonMove(poorPeople, myPoorHouse);
+                newsNumber = Person.PersonCollision(allPersons, inmates, poorPeople, newsFeed, newsNumber);
+                newsNumber = Person.RemoveFromPrison(inmates, allPersons, newsFeed, newsNumber);
                 Console.WriteLine("CITY");
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 Place.PrintMap(myCity, allPersons);
@@ -67,7 +66,7 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine(" ");
                 Console.WriteLine("POORHOUSE");
                 Console.WriteLine("--------------------------------------------------");
-                PoorHouse.PrintMap(myPoorHouse, poorHouse);
+                PoorHouse.PrintMap(myPoorHouse, poorPeople);
                 Console.WriteLine("--------------------------------------------------");
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
@@ -77,11 +76,12 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("----------");
                 Console.WriteLine();
                 Console.WriteLine("STATUS:");
-               Place.PrintStatus(allPersons, fullPeopleList, inmates, poorHouse);
+                Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 //Console.WriteLine("NEWS FEED:");
                 //Place.PrintNewsFeed(newsFeed, newsNumber);
-/*                newsNumber = */Place.PrintNewsFeed(newsFeed);
+                /*                newsNumber = */
+                Place.PrintNewsFeed(newsFeed);
 
             }
 

@@ -148,12 +148,13 @@ namespace Grupparbete_PolisOchTjuv
 
                             if (allPersons[p2] is Thief && allPersons[p2].Inventory.Count > 0)
                             {
-                                // Lägg till en random här för att slumpa föremål i lista/inventory
+                                GeneratePosition(allPersons[p2], 10, 10);
+                                inmates.Add(allPersons[p2]);
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} was sent to jail"));
+                                ((Thief)allPersons[p2]).PrisonStart = DateTime.Now;
+                                ((Thief)allPersons[p2]).PrisonStop = ((Thief)allPersons[p2]).PrisonStart.AddSeconds(10 * allPersons[p2].Inventory.Count);
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
                                 allPersons[p2].Inventory.Clear();
-                                GeneratePosition(allPersons[p2], 10, 10);
-                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} was sent to jail"));
-                                inmates.Add(allPersons[p2]);
                                 allPersons.RemoveAt(p2);
                                 newsNumber++;
                             }
@@ -164,12 +165,13 @@ namespace Grupparbete_PolisOchTjuv
 
                             if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
                             {
-                                // Lägg till en random här för att slumpa föremål i lista/inventory
+                                GeneratePosition(allPersons[p1], 10, 10);
+                                inmates.Add((Thief)allPersons[p1]);
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} was sent to jail"));
+                                ((Thief)allPersons[p1]).PrisonStart = DateTime.Now;
+                                ((Thief)allPersons[p1]).PrisonStop = ((Thief)allPersons[p1]).PrisonStart.AddSeconds(10 * allPersons[p1].Inventory.Count);
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
                                 allPersons[p1].Inventory.Clear();
-                                GeneratePosition(allPersons[p1], 10, 10);
-                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} was sent to jail"));
-                                inmates.Add(allPersons[p1]);
                                 allPersons.RemoveAt(p1);
                                 newsNumber++;
                             }
@@ -229,6 +231,25 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
+        public static int RemoveFromPrison(List<Person> inmates, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
+        {
+            if (inmates.Count > 0)
+            {
+                for (int i = 0; i < inmates.Count; i++)
+                {
+
+                    if (((Thief)inmates[i]).PrisonStop >= DateTime.Now)
+                    {
+                        allPersons.Add(inmates[i]);
+                        newsFeed.Enqueue($"{newsNumber}. Thief {inmates[i].Name} is released from prison into the city.");
+                        inmates.Remove(inmates[i]);
+                        newsNumber++;
+                    }
+                }
+            }
+            return newsNumber;
+        }
+
         public static void GeneratePosition(Person person, int width, int height)
         {
             int rndStartX = Random.Shared.Next(2, width);
@@ -238,15 +259,21 @@ namespace Grupparbete_PolisOchTjuv
         }
     }
 
-     
 
-        class Thief : Person
+
+    class Thief : Person
+    {
+        public DateTime PrisonStart;
+        public DateTime PrisonStop; //Använda det eller göra på annat sätt?
+
+        public Thief(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
         {
-            public Thief(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
-            {
-                Inventory = inventory;
-            }
+            Inventory = inventory;
+
         }
+
+
+    }
 
         class Citizen : Person
         {
