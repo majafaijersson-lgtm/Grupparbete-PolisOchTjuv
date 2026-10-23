@@ -191,7 +191,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
-        public static void AddPerson(List<Person> allPersons, char key)
+        public static void AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key)
         {
             switch(key)
             {
@@ -199,16 +199,19 @@ namespace Grupparbete_PolisOchTjuv
                 case 'p':
                     List<Police> newPolice = Helpers.CreatePolice();
                     allPersons.Add(newPolice[0]);
+                    fullPeopleList.Add(newPolice[0]);
                     break;
 
                 case 'c':
                     List<Citizen> newCitizen = Helpers.CreateCitizen();
                     allPersons.Add(newCitizen[0]);
+                    fullPeopleList.Add(newCitizen[0]);
                     break;
 
                 case 't':
                     List<Thief> newThief = Helpers.CreateThief();
                     allPersons.Add(newThief[0]);
+                    fullPeopleList.Add(newThief[0]);
                     break;
 
                 case 'v': // Ändra vy

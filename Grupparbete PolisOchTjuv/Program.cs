@@ -30,10 +30,12 @@ namespace Grupparbete_PolisOchTjuv
             thiefList = Helpers.CreateThief();
 
             List<Person> allPersons = new List<Person>();
+            List<Person> fullPeopleList = new List<Person>();
 
             allPersons.AddRange(thiefList);
             allPersons.AddRange(policeList);
             allPersons.AddRange(citizenList);
+            fullPeopleList.AddRange(allPersons);
             Console.ReadKey(true);
 
             //int nrOfCitizen = citizenList.Count;
@@ -48,11 +50,11 @@ namespace Grupparbete_PolisOchTjuv
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     char input = (char)key.KeyChar;
 
-                    Person.AddPerson(allPersons, input);
+                    Person.AddPerson(allPersons, fullPeopleList, input);
                 }
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
-                Thread.Sleep(800);
+                Thread.Sleep(100);
                 Person.PersonMove(allPersons, myCity);
                 Person.PersonMove(inmates, myPrison);
                 Person.PersonMove(poorHouse, myPoorHouse);
@@ -75,7 +77,7 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("----------");
                 Console.WriteLine();
                 Console.WriteLine("STATUS:");
-               Place.PrintStatus(allPersons, citizenList, policeList, thiefList);
+               Place.PrintStatus(allPersons, fullPeopleList, inmates, poorHouse);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
                 //Console.WriteLine("NEWS FEED:");
                 //Place.PrintNewsFeed(newsFeed, newsNumber);
