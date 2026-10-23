@@ -191,7 +191,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
-        public static void AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key)
+        public static int AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key, Queue<string> newsFeed, int newsNumber)
         {
             switch(key)
             {
@@ -200,26 +200,33 @@ namespace Grupparbete_PolisOchTjuv
                     List<Police> newPolice = Helpers.CreatePolice();
                     allPersons.Add(newPolice[0]);
                     fullPeopleList.Add(newPolice[0]);
+                    newsFeed.Enqueue($"{newsNumber}. Police {newPolice[0].Name} arrives to the city.");
+                    newsNumber++;
                     break;
 
                 case 'c':
                     List<Citizen> newCitizen = Helpers.CreateCitizen();
                     allPersons.Add(newCitizen[0]);
                     fullPeopleList.Add(newCitizen[0]);
+                    newsFeed.Enqueue($"{newsNumber}. Citizen {newCitizen[0].Name} arrives to the city.");
+                    newsNumber++;
                     break;
 
                 case 't':
                     List<Thief> newThief = Helpers.CreateThief();
                     allPersons.Add(newThief[0]);
                     fullPeopleList.Add(newThief[0]);
+                    newsFeed.Enqueue($"{newsNumber}. Thief {newThief[0].Name} arrives to the city.");
+                    newsNumber++;
                     break;
 
                 case 'v': // Ändra vy
 
                     break;
 
-
+    
             }
+            return newsNumber;
         }
 
         public static void GeneratePosition(Person person, int width, int height)

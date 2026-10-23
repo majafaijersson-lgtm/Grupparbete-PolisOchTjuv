@@ -50,7 +50,7 @@ namespace Grupparbete_PolisOchTjuv
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     char input = (char)key.KeyChar;
 
-                    Person.AddPerson(allPersons, fullPeopleList, input);
+                    newsNumber = Person.AddPerson(allPersons, fullPeopleList, input, newsFeed, newsNumber);
                 }
                 Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
