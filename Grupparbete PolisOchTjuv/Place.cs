@@ -101,8 +101,7 @@ namespace Grupparbete_PolisOchTjuv
                 newsFeed.Dequeue();
             }
 
-            // Poliser, C och T som tillkommer.
-            // T som kommer ut från finkan
+           
             // C som kommer ut från PH?
         }
 
@@ -113,7 +112,7 @@ namespace Grupparbete_PolisOchTjuv
 
             foreach (string text in newsFeed.Reverse()) //Kan man reversera utskriften? Omvänd for-loop? reverse-metod?
             {
-                Console.WriteLine(text); //Ändra newsnumber. Ta bort?
+                Console.WriteLine($"{text}                                               "); //Ändra newsnumber. Ta bort?
             }
         }
     }

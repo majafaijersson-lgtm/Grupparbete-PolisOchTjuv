@@ -135,7 +135,7 @@ namespace Grupparbete_PolisOchTjuv
                                     GeneratePosition(allPersons[p1], 50, 10);
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
                                     poorHouse.Add(allPersons[p1]);
-                                    allPersons.RemoveAt(p2);
+                                    allPersons.RemoveAt(p1);
                                     newsNumber++;
                                 }
                                 //newsNumber++;
@@ -157,8 +157,9 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p2].Inventory.Clear();
                                 allPersons.RemoveAt(p2);
                                 newsNumber++;
+                                break;
                             }
-                            else if (allPersons[p2].Inventory.Count == 0)
+                            else if (allPersons[p2].Inventory.Count == 0 && allPersons[p2] is Thief)
                             {
                                 newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT
                             }
@@ -174,8 +175,9 @@ namespace Grupparbete_PolisOchTjuv
                                 allPersons[p1].Inventory.Clear();
                                 allPersons.RemoveAt(p1);
                                 newsNumber++;
+                                break;
                             }
-                            else if (allPersons[p1].Inventory.Count == 0)
+                            else if (allPersons[p1].Inventory.Count == 0 && allPersons[p1] is Thief)
                             {
                                 newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
                             }
