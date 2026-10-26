@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 
 namespace Grupparbete_PolisOchTjuv
@@ -26,6 +27,14 @@ namespace Grupparbete_PolisOchTjuv
             MovePositionX = movePositionX;
             MovePositionY = movePositionY;
             Inventory = inventory;
+        }
+
+        public static void PrintPersonInfo(List<Person> fullPeopleList)
+        {
+            for (int i = 0; i < fullPeopleList.Count; i++)
+            {
+                Console.WriteLine($"Person {i}: {fullPeopleList[i].GetType().Name}: {fullPeopleList[i].Inventory} - {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}");
+            }
         }
 
         public static void PersonMove(List<Person> allPersons, Place map) //List inparameter rndMovementX och Y för att göra riktningsädnringar
@@ -181,16 +190,16 @@ namespace Grupparbete_PolisOchTjuv
                             {
                                 newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
                             }
+
                         }
 
                         if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
                             newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
 
-                        } 
+                        }
                     }
                 }
-                
             }
             return newsNumber;
         }
@@ -260,6 +269,9 @@ namespace Grupparbete_PolisOchTjuv
             person.CurrentPositionY = rndStartY;
         }
     }
+
+
+
 
 
 

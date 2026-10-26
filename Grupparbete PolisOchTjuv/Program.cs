@@ -82,6 +82,7 @@ namespace Grupparbete_PolisOchTjuv
                 //Place.PrintNewsFeed(newsFeed, newsNumber);
                 /*                newsNumber = */
                 Place.PrintNewsFeed(newsFeed);
+                Person.PrintPersonInfo(fullPeopleList);
 
             }
 
