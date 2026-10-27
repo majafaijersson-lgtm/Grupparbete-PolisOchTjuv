@@ -36,10 +36,8 @@ namespace Grupparbete_PolisOchTjuv
             fullPeopleList.AddRange(allPersons);
             Console.ReadKey(true);
 
-            //int nrOfCitizen = citizenList.Count;
-            //int nrOfPolice = policeList.Count;
-            //int nrOfThieves = thiefList.Count;
             int newsNumber = 1;
+            bool textMode = false;
 
             while (true)
             {
@@ -48,9 +46,15 @@ namespace Grupparbete_PolisOchTjuv
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     char input = (char)key.KeyChar;
 
+                    if (input == 'v')
+                    {
+                        textMode = !textMode;
+                        Console.Clear();
+                    }
+
                     newsNumber = Person.AddPerson(allPersons, fullPeopleList, input, newsFeed, newsNumber);
+
                 }
-                Console.SetCursorPosition(0, 0);
                 //Console.CursorVisible = false; tar bort flimmret?
                 Thread.Sleep(100);
                 Person.PersonMove(allPersons, myCity);
@@ -58,31 +62,62 @@ namespace Grupparbete_PolisOchTjuv
                 Person.PersonMove(poorPeople, myPoorHouse);
                 newsNumber = Person.PersonCollision(allPersons, inmates, poorPeople, newsFeed, newsNumber);
                 newsNumber = Person.RemoveFromPrison(inmates, allPersons, newsFeed, newsNumber);
-                Console.WriteLine("CITY");
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                Place.PrintMap(myCity, allPersons);
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                Console.WriteLine(" ");
-                Console.WriteLine(" ");
-                Console.WriteLine("POORHOUSE");
-                Console.WriteLine("--------------------------------------------------");
-                PoorHouse.PrintMap(myPoorHouse, poorPeople);
-                Console.WriteLine("--------------------------------------------------");
-                Console.WriteLine(" ");
-                Console.WriteLine(" ");
-                Console.WriteLine("PRISON");
-                Console.WriteLine("----------");
-                Prison.PrintMap(myPrison, inmates);
-                Console.WriteLine("----------");
-                Console.WriteLine();
-                Console.WriteLine("STATUS:");
-                Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
-                Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                Place.PrintNewsFeed(newsFeed);
+
                 //Person.PrintPersonInfo(fullPeopleList);
 
-            }
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey(true);
+                    char input = (char)key.KeyChar;
+                    //if (input == 'v')
+                    //{
+                    //    textMode = !textMode;
+                    //    Console.Clear();
+                    //}
+                }
 
+                if (!textMode)
+                {
+
+                    Console.WriteLine("CITY");
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                    Place.PrintMap(myCity, allPersons);
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("POORHOUSE");
+                    Console.WriteLine("--------------------------------------------------");
+                    PoorHouse.PrintMap(myPoorHouse, poorPeople);
+                    Console.WriteLine("--------------------------------------------------");
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("PRISON");
+                    Console.WriteLine("----------");
+                    Prison.PrintMap(myPrison, inmates);
+                    Console.WriteLine("----------");
+                    Console.WriteLine();
+
+                    Console.WriteLine("STATUS:");
+                    Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                    Place.PrintNewsFeed(newsFeed);
+                    Thread.Sleep(200);
+                    //Console.Clear();
+
+                }
+                else
+                {
+
+                    //Console.SetCursorPosition(0, 0);
+                    Person.PrintPersonInfo(fullPeopleList);
+                    Console.WriteLine("STATUS:");
+                    Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
+                    Place.PrintNewsFeed(newsFeed);
+                    Thread.Sleep(200);
+                }
+                Console.SetCursorPosition(0, 0);
+            }
         }
     }
 }

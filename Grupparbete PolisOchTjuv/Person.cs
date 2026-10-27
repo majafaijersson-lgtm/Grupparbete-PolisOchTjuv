@@ -38,7 +38,7 @@ namespace Grupparbete_PolisOchTjuv
                 {
                     Console.Write($"{item}, ");
                 }
-                Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.");
+                Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.                       ");
                 
             }
         }
@@ -234,40 +234,30 @@ namespace Grupparbete_PolisOchTjuv
                     newsNumber++;
                     break;
 
-                case 'v': // Ändra vy
-                    bool viewText = true;
-
-                    while (viewText)
-                    {
-                        if (Console.KeyAvailable)
-                        {
-                            ConsoleKeyInfo keyInput = Console.ReadKey(true);
-                            char input = (char)keyInput.KeyChar;
-                            if(input == 'm')
-                            {
-                                break;
-                            }
-                        }
-                        Console.Clear();
-                        PrintPersonInfo(fullPeopleList);
-
-                    }
-
-                    break;
-                case 'm':
-                    break;
+                //case 'v': // Ändra vy
+                //          //bool viewText = true;
 
 
+                //    //while (viewText)
+                //    //{
+                //    //    //if (Console.KeyAvailable)
+                //    //    //{
+                //    //    //    ConsoleKeyInfo keyInput = Console.ReadKey(true);
+                //    //    //    char input = (char)keyInput.KeyChar;
+                //    //    //    if(input == 'm')
+                //    //    //    {
+                //    //    //        break;
+                //    //    //    }
+                //    //    //}
+                //    //}
+                //    break;
 
-
-
-
-                    //alternativ för ändra tillbaka till kartan
-
+                //case 'm':
+                //    break;
 
             }
             return newsNumber;
-        }
+        }              
 
         public static int RemoveFromPrison(List<Person> inmates, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
         {
@@ -316,7 +306,7 @@ namespace Grupparbete_PolisOchTjuv
 
     }
 
-        class Citizen : Person
+    class Citizen : Person
         {
             public Citizen(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
@@ -324,7 +314,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        class Police : Person
+    class Police : Person
         {
             public Police(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
