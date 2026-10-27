@@ -102,6 +102,7 @@ namespace Grupparbete_PolisOchTjuv
 
         public static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
         {
+            List<Person> removeList = new List<Person>();
             for (int p1 = 0; p1 < allPersons.Count -1; p1++)
             {
                 for (int p2 = p1 + 1; p2 < allPersons.Count; p2++) // -1?
@@ -126,7 +127,8 @@ namespace Grupparbete_PolisOchTjuv
                                     GeneratePosition(allPersons[p2], 50, 10);
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
                                     poorHouse.Add(allPersons[p2]);
-                                    allPersons.RemoveAt(p2);
+                                    //allPersons.RemoveAt(p2);
+                                    removeList.Add(allPersons[p2]);
                                     newsNumber++;
 
                                 }
@@ -148,7 +150,8 @@ namespace Grupparbete_PolisOchTjuv
                                     GeneratePosition(allPersons[p1], 50, 10);
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
                                     poorHouse.Add(allPersons[p1]);
-                                    allPersons.RemoveAt(p1);
+                                    //allPersons.RemoveAt(p1);
+                                    removeList.Add(allPersons[p1]);
                                     newsNumber++;
                                 }
                             }
@@ -165,7 +168,8 @@ namespace Grupparbete_PolisOchTjuv
                                 ((Thief)allPersons[p2]).PrisonStop = ((Thief)allPersons[p2]).PrisonStart.AddSeconds(10 * allPersons[p2].Inventory.Count);
                                 allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
                                 allPersons[p2].Inventory.Clear();
-                                allPersons.RemoveAt(p2);
+                                //allPersons.RemoveAt(p2);
+                                removeList.Add(allPersons[p2]);
                                 newsNumber++;
                                 break;
                             }
@@ -183,7 +187,8 @@ namespace Grupparbete_PolisOchTjuv
                                 ((Thief)allPersons[p1]).PrisonStop = ((Thief)allPersons[p1]).PrisonStart.AddSeconds(10 * allPersons[p1].Inventory.Count);
                                 allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
                                 allPersons[p1].Inventory.Clear();
-                                allPersons.RemoveAt(p1);
+                                //allPersons.RemoveAt(p1);
+                                removeList.Add(allPersons[p1]);
                                 newsNumber++;
                                 break;
                             }
@@ -200,6 +205,10 @@ namespace Grupparbete_PolisOchTjuv
                             break;
 
                         }
+                    }
+                    foreach (Person person in removeList)
+                    {
+                        allPersons.Remove(person);
                     }
                 }
             }
