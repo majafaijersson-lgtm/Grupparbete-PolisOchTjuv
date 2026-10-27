@@ -33,7 +33,13 @@ namespace Grupparbete_PolisOchTjuv
         {
             for (int i = 0; i < fullPeopleList.Count; i++)
             {
-                Console.WriteLine($"Person {i}: {fullPeopleList[i].GetType().Name}: {fullPeopleList[i].Inventory} - {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}");
+                Console.Write($"Person {i}: {fullPeopleList[i].GetType().Name}: ");
+                foreach(String item in fullPeopleList[i].Inventory)
+                {
+                    Console.Write($"{item}, ");
+                }
+                Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.");
+                
             }
         }
 
@@ -206,7 +212,7 @@ namespace Grupparbete_PolisOchTjuv
 
         public static int AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key, Queue<string> newsFeed, int newsNumber)
         {
-            switch(key)
+            switch (key)
             {
 
                 case 'p':
@@ -237,7 +243,9 @@ namespace Grupparbete_PolisOchTjuv
 
                     break;
 
-    
+                    //alternativ för ändra tillbaka till kartan
+
+
             }
             return newsNumber;
         }
