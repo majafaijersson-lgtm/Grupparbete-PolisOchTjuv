@@ -154,7 +154,7 @@ namespace Grupparbete_PolisOchTjuv
                             }
                         }
 
-                        if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
+                        else if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
                             if (allPersons[p2] is Thief && allPersons[p2].Inventory.Count > 0)
                             {
@@ -194,9 +194,10 @@ namespace Grupparbete_PolisOchTjuv
 
                         }
 
-                        if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
+                        else if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
                             newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
+                            break;
 
                         }
                     }
