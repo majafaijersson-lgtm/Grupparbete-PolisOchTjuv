@@ -112,7 +112,8 @@ namespace Grupparbete_PolisOchTjuv
                         if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
                         {
                             var thief = (Thief) (allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
-                            var citizen = (Citizen) (allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
+                            var citizen = (Citizen) (allPersons[p1] is Citizen ? allPersons[p1] : allPersons[p2]);
+
                             if (allPersons[p2] is Citizen)
                             {
                                 if (citizen.Inventory.Count > 0)
