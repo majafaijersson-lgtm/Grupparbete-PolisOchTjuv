@@ -111,92 +111,53 @@ namespace Grupparbete_PolisOchTjuv
                     {
                         if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
                         {
+                            var thief = (Thief) (allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
+                            var citizen = (Citizen) (allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
                             if (allPersons[p2] is Citizen)
                             {
-                                if (allPersons[p2].Inventory.Count > 0)
+                                if (citizen.Inventory.Count > 0)
                                     {
                                     // Lägg till en random här för att slumpa föremål i lista/inventory
-                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} stole {allPersons[p2].Inventory[0]} from citizen {allPersons[p2].Name}."));
-                                    allPersons[p1].Inventory.Add(allPersons[p2].Inventory[0]);
-                                    allPersons[p2].Inventory.RemoveAt(0);
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} stole {citizen.Inventory[0]} from citizen {citizen.Name}."));
+                                    thief.Inventory.Add(citizen.Inventory[0]);
+                                    citizen.Inventory.RemoveAt(0);
                                     newsNumber++;
                                 }
 
-                                if (allPersons[p2].Inventory.Count == 0)
+                                if (citizen.Inventory.Count == 0)
                                 {
-                                    GeneratePosition(allPersons[p2], 50, 10);
-                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
-                                    poorHouse.Add(allPersons[p2]);
+                                    GeneratePosition(citizen, 50, 10);
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {citizen.Name} was sent to poorhouse"));
+                                    poorHouse.Add(citizen);
                                     //allPersons.RemoveAt(p2);
-                                    removeList.Add(allPersons[p2]);
+                                    removeList.Add(citizen);
                                     newsNumber++;
 
-                                }
-                            }
-                            if (allPersons[p1] is Citizen)
-                            {
-                                if (allPersons[p1].Inventory.Count > 0)
-                                {
-                                    // Lägg till en random här för att slumpa föremål i lista/inventory
-                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} stole {allPersons[p1].Inventory[0]} from citizen {allPersons[p1].Name}."));
-                                    allPersons[p2].Inventory.Add(allPersons[p1].Inventory[0]);
-                                    allPersons[p1].Inventory.RemoveAt(0);
-                                    newsNumber++;
-
-                                }
-
-                                if (allPersons[p1].Inventory.Count == 0)
-                                {
-                                    GeneratePosition(allPersons[p1], 50, 10);
-                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {allPersons[p2].Name} was sent to poorhouse"));
-                                    poorHouse.Add(allPersons[p1]);
-                                    //allPersons.RemoveAt(p1);
-                                    removeList.Add(allPersons[p1]);
-                                    newsNumber++;
                                 }
                             }
                         }
-
                         else if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
-                            if (allPersons[p2] is Thief && allPersons[p2].Inventory.Count > 0)
+                            var thief = (Thief) (allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
+                            var police = (Police) (allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
+                            if (thief.Inventory.Count > 0)
                             {
-                                GeneratePosition(allPersons[p2], 10, 10);
-                                inmates.Add(allPersons[p2]);
-                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p2].Name} was sent to jail"));
-                                ((Thief)allPersons[p2]).PrisonStart = DateTime.Now;
-                                ((Thief)allPersons[p2]).PrisonStop = ((Thief)allPersons[p2]).PrisonStart.AddSeconds(10 * allPersons[p2].Inventory.Count);
-                                allPersons[p1].Inventory.AddRange(allPersons[p2].Inventory);
-                                allPersons[p2].Inventory.Clear();
+                                GeneratePosition(thief, 10, 10);
+                                inmates.Add(thief);
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} was sent to jail"));
+                                thief.PrisonStart = DateTime.Now;
+                                thief.PrisonStop = thief.PrisonStart.AddSeconds(10 * thief.Inventory.Count);
+                                police.Inventory.AddRange(thief.Inventory);
+                                thief.Inventory.Clear();
                                 //allPersons.RemoveAt(p2);
-                                removeList.Add(allPersons[p2]);
+                                removeList.Add(thief);
                                 newsNumber++;
                                 break;
                             }
-                            else if (allPersons[p2].Inventory.Count == 0 && allPersons[p2] is Thief)
+                            else if (thief.Inventory.Count == 0)
                             {
                                 newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT
                             }
-
-                            if (allPersons[p1] is Thief && allPersons[p1].Inventory.Count > 0)
-                            {
-                                GeneratePosition(allPersons[p1], 10, 10);
-                                inmates.Add((Thief)allPersons[p1]);
-                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {allPersons[p1].Name} was sent to jail"));
-                                ((Thief)allPersons[p1]).PrisonStart = DateTime.Now;
-                                ((Thief)allPersons[p1]).PrisonStop = ((Thief)allPersons[p1]).PrisonStart.AddSeconds(10 * allPersons[p1].Inventory.Count);
-                                allPersons[p2].Inventory.AddRange(allPersons[p1].Inventory);
-                                allPersons[p1].Inventory.Clear();
-                                //allPersons.RemoveAt(p1);
-                                removeList.Add(allPersons[p1]);
-                                newsNumber++;
-                                break;
-                            }
-                            else if (allPersons[p1].Inventory.Count == 0 && allPersons[p1] is Thief)
-                            {
-                                newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
-                            }
-
                         }
 
                         else if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
