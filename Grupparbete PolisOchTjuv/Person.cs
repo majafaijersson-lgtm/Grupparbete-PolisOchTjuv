@@ -130,8 +130,6 @@ namespace Grupparbete_PolisOchTjuv
                                     newsNumber++;
 
                                 }
-                                //newsNumber++;
-
                             }
                             if (allPersons[p1] is Citizen)
                             {
@@ -153,14 +151,11 @@ namespace Grupparbete_PolisOchTjuv
                                     allPersons.RemoveAt(p1);
                                     newsNumber++;
                                 }
-                                //newsNumber++;
                             }
-                            
                         }
 
                         if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
-
                             if (allPersons[p2] is Thief && allPersons[p2].Inventory.Count > 0)
                             {
                                 GeneratePosition(allPersons[p2], 10, 10);
@@ -240,8 +235,32 @@ namespace Grupparbete_PolisOchTjuv
                     break;
 
                 case 'v': // Ändra vy
+                    bool viewText = true;
+
+                    while (viewText)
+                    {
+                        if (Console.KeyAvailable)
+                        {
+                            ConsoleKeyInfo keyInput = Console.ReadKey(true);
+                            char input = (char)keyInput.KeyChar;
+                            if(input == 'm')
+                            {
+                                break;
+                            }
+                        }
+                        Console.Clear();
+                        PrintPersonInfo(fullPeopleList);
+
+                    }
 
                     break;
+                case 'm':
+                    break;
+
+
+
+
+
 
                     //alternativ för ändra tillbaka till kartan
 

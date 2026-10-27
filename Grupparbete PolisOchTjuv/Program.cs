@@ -78,11 +78,8 @@ namespace Grupparbete_PolisOchTjuv
                 Console.WriteLine("STATUS:");
                 Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
                 Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                //Console.WriteLine("NEWS FEED:");
-                //Place.PrintNewsFeed(newsFeed, newsNumber);
-                /*                newsNumber = */
                 Place.PrintNewsFeed(newsFeed);
-                Person.PrintPersonInfo(fullPeopleList);
+                //Person.PrintPersonInfo(fullPeopleList);
 
             }
 
