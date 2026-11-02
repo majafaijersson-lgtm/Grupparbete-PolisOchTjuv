@@ -241,7 +241,7 @@ namespace Grupparbete_PolisOchTjuv
                     if (((Thief)inmates[i]).PrisonStop <= DateTime.Now)
                     {
                         allPersons.Add(inmates[i]);
-                        newsFeed.Enqueue($"{newsNumber}. Thief {inmates[i].Name} is released from prison into the city.");
+                        Place.AddNewsFeed(newsFeed, $"{newsNumber}. Thief {inmates[i].Name} is released from prison into the city.");
                         inmates.Remove(inmates[i]);
                         newsNumber++;
                     }

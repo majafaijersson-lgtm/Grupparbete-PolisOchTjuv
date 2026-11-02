@@ -96,7 +96,7 @@ namespace Grupparbete_PolisOchTjuv
                     Prison.PrintMap(myPrison, inmates);
                     Console.WriteLine("----------");
                     Console.WriteLine();
-
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("STATUS:");
                     Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");
@@ -110,6 +110,7 @@ namespace Grupparbete_PolisOchTjuv
 
                     //Console.SetCursorPosition(0, 0);
                     Person.PrintPersonInfo(fullPeopleList);
+                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("STATUS:");
                     Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");

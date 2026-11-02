@@ -118,7 +118,7 @@ namespace Grupparbete_PolisOchTjuv
                 int rndMovementX = Random.Shared.Next(-1, 2);
                 int rndMovementY = Random.Shared.Next(-1, 2);
                 List<string> inventory = new List<string>();
-                inventory.AddRange("nycklar", "mobiltelefon", "pengar", "klocka");
+                inventory.AddRange("keys", "mobile phone", "money", "clock");
                 char icon = 'C';
                 ConsoleColor iconColor = ConsoleColor.Green;
                 personList.Add(new Citizen(GetName(),icon,iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, inventory));
