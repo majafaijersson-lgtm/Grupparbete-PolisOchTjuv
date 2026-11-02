@@ -129,6 +129,8 @@ namespace Grupparbete_PolisOchTjuv
                                 {
                                     GeneratePosition(citizen, 50, 10);
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {citizen.Name} was sent to poorhouse."));
+                                    citizen.PoorHouseStart = DateTime.Now;
+                                    citizen.PoorHouseStop = citizen.PoorHouseStart.AddSeconds(10);
                                     poorHouse.Add(citizen);
                                     //allPersons.RemoveAt(p2);
                                     removeList.Add(citizen);
@@ -206,27 +208,6 @@ namespace Grupparbete_PolisOchTjuv
                     newsNumber++;
                     break;
 
-                //case 'v': // Ändra vy
-                //          //bool viewText = true;
-
-
-                //    //while (viewText)
-                //    //{
-                //    //    //if (Console.KeyAvailable)
-                //    //    //{
-                //    //    //    ConsoleKeyInfo keyInput = Console.ReadKey(true);
-                //    //    //    char input = (char)keyInput.KeyChar;
-                //    //    //    if(input == 'm')
-                //    //    //    {
-                //    //    //        break;
-                //    //    //    }
-                //    //    //}
-                //    //}
-                //    break;
-
-                //case 'm':
-                //    break;
-
             }
             return newsNumber;
         }              
@@ -244,6 +225,27 @@ namespace Grupparbete_PolisOchTjuv
                         Place.AddNewsFeed(newsFeed, $"{newsNumber}. Thief {inmates[i].Name} is released from prison into the city.");
                         inmates.Remove(inmates[i]);
                         newsNumber++;
+                    }
+                }
+            }
+            return newsNumber;
+        }
+
+        public static int RemoveFromPoorHouse(List<Person> poorPeople, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
+        {
+            if (poorPeople.Count > 0)
+            {
+                for (int i = 0; i < poorPeople.Count; i++)
+                {
+
+                    if (((Citizen)poorPeople[i]).PoorHouseStop <= DateTime.Now)
+                    {
+                        poorPeople[i].Inventory.Add("money");
+                        allPersons.Add(poorPeople[i]);
+                        Place.AddNewsFeed(newsFeed, $"{newsNumber}. Slum {poorPeople[i].Name} is released from poor house into the city with a bit of money.");
+                        poorPeople.Remove(poorPeople[i]);
+                        newsNumber++;
+
                     }
                 }
             }
@@ -280,6 +282,9 @@ namespace Grupparbete_PolisOchTjuv
 
     class Citizen : Person
         {
+        public DateTime PoorHouseStart;
+        public DateTime PoorHouseStop;
+
             public Citizen(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
             {
                 Inventory = inventory;

@@ -62,7 +62,7 @@ namespace Grupparbete_PolisOchTjuv
                 Person.PersonMove(poorPeople, myPoorHouse);
                 newsNumber = Person.PersonCollision(allPersons, inmates, poorPeople, newsFeed, newsNumber);
                 newsNumber = Person.RemoveFromPrison(inmates, allPersons, newsFeed, newsNumber);
-
+                newsNumber = Person.RemoveFromPoorHouse(inmates, allPersons, newsFeed, newsNumber);
                 //Person.PrintPersonInfo(fullPeopleList);
 
                 if (Console.KeyAvailable)
