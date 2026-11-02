@@ -38,7 +38,7 @@ namespace Grupparbete_PolisOchTjuv
                 {
                     Console.Write($"{item}, ");
                 }
-                Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.                       ");
+                Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.                                                                                                                       ");
                 
             }
         }

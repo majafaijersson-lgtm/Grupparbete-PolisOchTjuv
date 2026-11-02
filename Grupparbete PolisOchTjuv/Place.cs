@@ -86,9 +86,9 @@ namespace Grupparbete_PolisOchTjuv
                 }  
             }
 
-            Console.WriteLine($"Of {citizen} citizens, {citizen - poorhouse.Count} remain in the city.");
-            Console.WriteLine($"Of {thief} thieves, {thief - inmates.Count} remain in the city.");
-            Console.WriteLine($"There are {police} police in the city.");
+            Console.WriteLine($"Of {citizen} citizens, {citizen - poorhouse.Count} remain in the city.                                                        ");
+            Console.WriteLine($"Of {thief} thieves, {thief - inmates.Count} remain in the city.                                                               ");
+            Console.WriteLine($"There are {police} police in the city.                                                                                        ");
 
         }
 
