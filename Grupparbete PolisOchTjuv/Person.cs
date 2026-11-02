@@ -186,7 +186,7 @@ namespace Grupparbete_PolisOchTjuv
                     List<Police> newPolice = Helpers.CreatePolice();
                     allPersons.Add(newPolice[0]);
                     fullPeopleList.Add(newPolice[0]);
-                    newsFeed.Enqueue($"{newsNumber}. Police {newPolice[0].Name} arrives to the city.");
+                    Place.AddNewsFeed(newsFeed, $"{newsNumber}. Police {newPolice[0].Name} arrives to the city.");
                     newsNumber++;
                     break;
 
@@ -194,7 +194,7 @@ namespace Grupparbete_PolisOchTjuv
                     List<Citizen> newCitizen = Helpers.CreateCitizen();
                     allPersons.Add(newCitizen[0]);
                     fullPeopleList.Add(newCitizen[0]);
-                    newsFeed.Enqueue($"{newsNumber}. Citizen {newCitizen[0].Name} arrives to the city.");
+                    Place.AddNewsFeed(newsFeed, $"{newsNumber}. Citizen {newCitizen[0].Name} arrives to the city.");
                     newsNumber++;
                     break;
 
@@ -202,7 +202,7 @@ namespace Grupparbete_PolisOchTjuv
                     List<Thief> newThief = Helpers.CreateThief();
                     allPersons.Add(newThief[0]);
                     fullPeopleList.Add(newThief[0]);
-                    newsFeed.Enqueue($"{newsNumber}. Thief {newThief[0].Name} arrives to the city.");
+                    Place.AddNewsFeed(newsFeed, $"{newsNumber}. Thief {newThief[0].Name} arrives to the city.");
                     newsNumber++;
                     break;
 
