@@ -74,25 +74,25 @@ namespace Grupparbete_PolisOchTjuv
         {
             if (p1 is Citizen && p2 is Citizen) //C säger hej till C
             {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} says hello to {p2.GetType().Name} !"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
             }
 
             else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
                      (p1 is Police && p2 is Citizen))
             {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} sayas hello to {p2.GetType().Name}!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
             }
 
             else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
             {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Police says hello to Thief!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
             }
             else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
             {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief says hello to Police!"));
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
 
             }
@@ -128,7 +128,7 @@ namespace Grupparbete_PolisOchTjuv
                                 if (citizen.Inventory.Count == 0)
                                 {
                                     GeneratePosition(citizen, 50, 10);
-                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {citizen.Name} was sent to poorhouse"));
+                                    Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {citizen.Name} was sent to poorhouse."));
                                     poorHouse.Add(citizen);
                                     //allPersons.RemoveAt(p2);
                                     removeList.Add(citizen);
@@ -145,7 +145,7 @@ namespace Grupparbete_PolisOchTjuv
                             {
                                 GeneratePosition(thief, 10, 10);
                                 inmates.Add(thief);
-                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} was sent to jail"));
+                                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} was sent to jail."));
                                 thief.PrisonStart = DateTime.Now;
                                 thief.PrisonStop = thief.PrisonStart.AddSeconds(10 * thief.Inventory.Count);
                                 police.Inventory.AddRange(thief.Inventory);
