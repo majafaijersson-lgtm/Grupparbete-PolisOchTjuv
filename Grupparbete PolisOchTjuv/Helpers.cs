@@ -82,7 +82,6 @@ namespace Grupparbete_PolisOchTjuv
                 char icon = 'P';
                 ConsoleColor iconColor = ConsoleColor.Blue;
                 personList.Add(new Police(GetName(), icon, iconColor, rndStartX, rndStartY, rndMovementX, rndMovementY, seizedInventory));
-                //Person person1 = new(GetName(), ) /*Person((GetName()), (int i = (Random.Next.Shared(1, 99)), (Random.Next.Shared(1, 99)), )*/    
             }
 
             return personList;

@@ -20,7 +20,6 @@ namespace Grupparbete_PolisOchTjuv
         }
 
         public static void PrintMap(Place myPlace, List<Person> allPersons)
-
         {
 
             for (int row = 0; row < myPlace.Height; row++)
@@ -41,7 +40,6 @@ namespace Grupparbete_PolisOchTjuv
                             if (person.CurrentPositionX == col && person.CurrentPositionY == row)
                             {
                                 Console.ForegroundColor = person.IconColor;
-                                //person.Map[CurrentPsoitionX, CurrentPositionY] = person.Icon;
                                 Console.Write(person.Icon);
                                 found = true;
                                 Console.ResetColor();
@@ -58,14 +56,11 @@ namespace Grupparbete_PolisOchTjuv
                 }
 
                 Console.WriteLine();
-
             }
-
         }
 
         public static void PrintStatus(List<Person> allPersons, List<Person> fullPeopleList, List<Person> inmates, List<Person> poorhouse)
         {
-
             int citizen = 0;
             int police = 0;
             int thief = 0;
@@ -89,7 +84,6 @@ namespace Grupparbete_PolisOchTjuv
             Console.WriteLine($"Of {citizen} citizens, {citizen - poorhouse.Count} remain in the city.                                                        ");
             Console.WriteLine($"Of {thief} thieves, {thief - inmates.Count} remain in the city.                                                               ");
             Console.WriteLine($"There are {police} police in the city.                                                                                        ");
-
         }
 
         public static void AddNewsFeed(Queue<string> newsFeed, string news)
@@ -102,7 +96,6 @@ namespace Grupparbete_PolisOchTjuv
             }
 
            
-            // C som kommer ut från PH?
         }
 
         public static void PrintNewsFeed(Queue<string> newsFeed)

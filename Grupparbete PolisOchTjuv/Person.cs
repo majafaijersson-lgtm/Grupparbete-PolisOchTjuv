@@ -118,7 +118,6 @@ namespace Grupparbete_PolisOchTjuv
                             {
                                 if (citizen.Inventory.Count > 0)
                                     {
-                                    // Lägg till en random här för att slumpa föremål i lista/inventory
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} stole {citizen.Inventory[0]} from citizen {citizen.Name}."));
                                     thief.Inventory.Add(citizen.Inventory[0]);
                                     citizen.Inventory.RemoveAt(0);
@@ -132,7 +131,6 @@ namespace Grupparbete_PolisOchTjuv
                                     citizen.PoorHouseStart = DateTime.Now;
                                     citizen.PoorHouseStop = citizen.PoorHouseStart.AddSeconds(10);
                                     poorHouse.Add(citizen);
-                                    //allPersons.RemoveAt(p2);
                                     removeList.Add(citizen);
                                     newsNumber++;
 
@@ -152,7 +150,6 @@ namespace Grupparbete_PolisOchTjuv
                                 thief.PrisonStop = thief.PrisonStart.AddSeconds(10 * thief.Inventory.Count);
                                 police.Inventory.AddRange(thief.Inventory);
                                 thief.Inventory.Clear();
-                                //allPersons.RemoveAt(p2);
                                 removeList.Add(thief);
                                 newsNumber++;
                                 break;

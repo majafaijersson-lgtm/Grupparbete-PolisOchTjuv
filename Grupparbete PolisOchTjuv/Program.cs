@@ -55,7 +55,6 @@ namespace Grupparbete_PolisOchTjuv
                     newsNumber = Person.AddPerson(allPersons, fullPeopleList, input, newsFeed, newsNumber);
 
                 }
-                //Console.CursorVisible = false; tar bort flimmret?
                 Thread.Sleep(100);
                 Person.PersonMove(allPersons, myCity);
                 Person.PersonMove(inmates, myPrison);
@@ -63,17 +62,11 @@ namespace Grupparbete_PolisOchTjuv
                 newsNumber = Person.PersonCollision(allPersons, inmates, poorPeople, newsFeed, newsNumber);
                 newsNumber = Person.RemoveFromPrison(inmates, allPersons, newsFeed, newsNumber);
                 newsNumber = Person.RemoveFromPoorHouse(poorPeople, allPersons, newsFeed, newsNumber);
-                //Person.PrintPersonInfo(fullPeopleList);
 
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
                     char input = (char)key.KeyChar;
-                    //if (input == 'v')
-                    //{
-                    //    textMode = !textMode;
-                    //    Console.Clear();
-                    //}
                 }
 
                 if (!textMode)
@@ -102,13 +95,10 @@ namespace Grupparbete_PolisOchTjuv
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Place.PrintNewsFeed(newsFeed);
                     Thread.Sleep(200);
-                    //Console.Clear();
 
                 }
                 else
                 {
-
-                    //Console.SetCursorPosition(0, 0);
                     Person.PrintPersonInfo(fullPeopleList);
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("STATUS:");
