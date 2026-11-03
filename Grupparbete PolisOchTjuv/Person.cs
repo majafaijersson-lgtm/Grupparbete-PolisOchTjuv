@@ -8,16 +8,16 @@ namespace Grupparbete_PolisOchTjuv
 {
     internal class Person
     {
-        public string Name { get; set; }
-        public char Icon { get; set; }
-        public ConsoleColor IconColor { get; set; }
-        public int CurrentPositionX { get; set; }
-        public int CurrentPositionY { get; set; }
-        public int MovePositionX { get; set; }
-        public int MovePositionY { get; set; }
-        public List<string> Inventory { get; set; }
+        internal string Name { get; set; }
+        internal char Icon { get; set; }
+        internal ConsoleColor IconColor { get; set; }
+        internal int CurrentPositionX { get; set; }
+        internal int CurrentPositionY { get; set; }
+        internal int MovePositionX { get; set; }
+        internal int MovePositionY { get; set; }
+        internal List<string> Inventory { get; set; }
 
-        public Person(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory)
+        internal Person(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory)
         {
             Name = name;
             Icon = icon;
@@ -29,7 +29,7 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
         }
 
-        public static void PrintPersonInfo(List<Person> fullPeopleList)
+        internal static void PrintPersonInfo(List<Person> fullPeopleList)
         {
             for (int i = 0; i < fullPeopleList.Count; i++)
             {
@@ -43,7 +43,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void PersonMove(List<Person> allPersons, Place map) //List inparameter rndMovementX och Y för att göra riktningsädnringar
+        internal static void PersonMove(List<Person> allPersons, Place map) //List inparameter rndMovementX och Y för att göra riktningsädnringar
         {
             foreach (Person person in allPersons)
             {
@@ -70,7 +70,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
+        private static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
         {
             if (p1 is Citizen && p2 is Citizen) //C säger hej till C
             {
@@ -100,7 +100,7 @@ namespace Grupparbete_PolisOchTjuv
         }
 
 
-        public static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
+        internal static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
         {
             List<Person> removeList = new List<Person>();
             for (int p1 = 0; p1 < allPersons.Count -1; p1++)
@@ -176,7 +176,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
-        public static int AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key, Queue<string> newsFeed, int newsNumber)
+        internal static int AddPerson(List<Person> allPersons, List<Person> fullPeopleList, char key, Queue<string> newsFeed, int newsNumber)
         {
             switch (key)
             {
@@ -209,7 +209,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }              
 
-        public static int RemoveFromPrison(List<Person> inmates, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
+        internal static int RemoveFromPrison(List<Person> inmates, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
         {
             if (inmates.Count > 0)
             {
@@ -228,7 +228,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
-        public static int RemoveFromPoorHouse(List<Person> poorPeople, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
+        internal static int RemoveFromPoorHouse(List<Person> poorPeople, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
         {
             if (poorPeople.Count > 0)
             {
@@ -249,7 +249,7 @@ namespace Grupparbete_PolisOchTjuv
             return newsNumber;
         }
 
-        public static void GeneratePosition(Person person, int width, int height)
+        private static void GeneratePosition(Person person, int width, int height)
         {
             int rndStartX = Random.Shared.Next(2, width);
             int rndStartY = Random.Shared.Next(2, height);

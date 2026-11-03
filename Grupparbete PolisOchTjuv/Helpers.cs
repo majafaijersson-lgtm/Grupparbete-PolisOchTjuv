@@ -8,7 +8,7 @@ namespace Grupparbete_PolisOchTjuv
 {
     internal class Helpers
     {
-        public static string GetName()
+        private static string GetName()
         {
             string[] Names =
             {
@@ -68,7 +68,7 @@ namespace Grupparbete_PolisOchTjuv
             return Names[rnd];
         }
 
-        public static List<Police> CreatePolice()
+        internal static List<Police> CreatePolice()
         {
             List<Police> personList = new List<Police>();
 
@@ -87,7 +87,7 @@ namespace Grupparbete_PolisOchTjuv
             return personList;
         }
 
-        public static List<Thief> CreateThief()
+        internal static List<Thief> CreateThief()
         {
             List<Thief> personList = new List<Thief>();
             
@@ -106,7 +106,7 @@ namespace Grupparbete_PolisOchTjuv
             return personList;
         }
 
-        public static List<Citizen> CreateCitizen()
+        internal static List<Citizen> CreateCitizen()
         {
             List<Citizen> personList = new List<Citizen>();
             

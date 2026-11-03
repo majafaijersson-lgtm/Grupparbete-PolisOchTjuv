@@ -8,18 +8,18 @@ namespace Grupparbete_PolisOchTjuv
 {
     internal class Place
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public char[,] Map { get; set; }
+        internal int Width { get; set; }
+        internal int Height { get; set; }
+        internal char[,] Map { get; set; }
 
-        public Place(int width, int heigth)
+        internal Place(int width, int heigth)
         {
             Width = width;
             Height = heigth;
             Map = new char[Height, Width];
         }
 
-        public static void PrintMap(Place myPlace, List<Person> allPersons)
+        internal static void PrintMap(Place myPlace, List<Person> allPersons)
         {
 
             for (int row = 0; row < myPlace.Height; row++)
@@ -59,7 +59,7 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        public static void PrintStatus(List<Person> allPersons, List<Person> fullPeopleList, List<Person> inmates, List<Person> poorhouse)
+        internal static void PrintStatus(List<Person> allPersons, List<Person> fullPeopleList, List<Person> inmates, List<Person> poorhouse)
         {
             int citizen = 0;
             int police = 0;
@@ -86,7 +86,7 @@ namespace Grupparbete_PolisOchTjuv
             Console.WriteLine($"There are {police} police in the city.                                                                                        ");
         }
 
-        public static void AddNewsFeed(Queue<string> newsFeed, string news)
+        internal static void AddNewsFeed(Queue<string> newsFeed, string news)
         {
             newsFeed.Enqueue(news); //lägger till string sist i "kön". string news från main(ej tillagt ännu)
 
@@ -98,7 +98,7 @@ namespace Grupparbete_PolisOchTjuv
            
         }
 
-        public static void PrintNewsFeed(Queue<string> newsFeed)
+        internal static void PrintNewsFeed(Queue<string> newsFeed)
         {
 
             Console.WriteLine("NEWS FEED");
@@ -110,7 +110,7 @@ namespace Grupparbete_PolisOchTjuv
         }
     }
 
-    class City : Place
+   internal class City : Place
     {
         public City(int width, int height) : base(width, height)
         {
@@ -121,7 +121,7 @@ namespace Grupparbete_PolisOchTjuv
 
     }
 
-    class Prison : Place
+    internal class Prison : Place
     {
         public Prison(int width, int height) : base(width, height)
         {
@@ -132,7 +132,7 @@ namespace Grupparbete_PolisOchTjuv
 
     }
 
-    class PoorHouse : Place
+   internal class PoorHouse : Place
     {
         public PoorHouse(int width, int height) : base(width, height)
         {

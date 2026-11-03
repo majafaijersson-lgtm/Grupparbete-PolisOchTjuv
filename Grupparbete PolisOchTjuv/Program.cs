@@ -6,8 +6,8 @@ namespace Grupparbete_PolisOchTjuv
 {
     internal class Program
     {
-        static void Main(string[] args)
-        {
+       internal static void Main(string[] args)
+       {
 
             List<Person> inmates = new List<Person>();
             List<Person> poorPeople = new List<Person>();
