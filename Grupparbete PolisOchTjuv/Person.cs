@@ -34,12 +34,12 @@ namespace Grupparbete_PolisOchTjuv
             for (int i = 0; i < fullPeopleList.Count; i++)
             {
                 Console.Write($"Person {i}: {fullPeopleList[i].GetType().Name}: ");
-                foreach(String item in fullPeopleList[i].Inventory)
+                foreach (String item in fullPeopleList[i].Inventory)
                 {
                     Console.Write($"{item}, ");
                 }
                 Console.WriteLine($"- {fullPeopleList[i].CurrentPositionX}, {fullPeopleList[i].CurrentPositionY}.                                                                                                                       ");
-                
+
             }
         }
 
@@ -70,40 +70,45 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        private static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
+        internal virtual int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
         {
-            if (p1 is Citizen && p2 is Citizen) //C säger hej till C
-            {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-                newsNumber++;
-            }
-
-            else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
-                     (p1 is Police && p2 is Citizen))
-            {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-                newsNumber++;
-            }
-
-            else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
-            {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-                newsNumber++;
-            }
-            else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
-            {
-                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-                newsNumber++;
-
-            }
-            return newsNumber;
+            //Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
+            return newsNumber + 1;
         }
+        //private static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
+        //{
+        //    if (p1 is Citizen && p2 is Citizen) //C säger hej till C
+        //    {
+        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+        //        newsNumber++;
+        //    }
 
+        //    else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
+        //             (p1 is Police && p2 is Citizen))
+        //    {
+        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+        //        newsNumber++;
+        //    }
+
+        //    else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
+        //    {
+        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+        //        newsNumber++;
+        //    }
+        //    else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
+        //    {
+        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+        //        newsNumber++;
+
+        //    }
+        //    return newsNumber;
+        //}
 
         internal static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
         {
             List<Person> removeList = new List<Person>();
-            for (int p1 = 0; p1 < allPersons.Count -1; p1++)
+
+            for (int p1 = 0; p1 < allPersons.Count - 1; p1++)
             {
                 for (int p2 = p1 + 1; p2 < allPersons.Count; p2++) // -1?
                 {
@@ -111,13 +116,13 @@ namespace Grupparbete_PolisOchTjuv
                     {
                         if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
                         {
-                            var thief = (Thief) (allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
-                            var citizen = (Citizen) (allPersons[p1] is Citizen ? allPersons[p1] : allPersons[p2]);
+                            var thief = (Thief)(allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
+                            var citizen = (Citizen)(allPersons[p1] is Citizen ? allPersons[p1] : allPersons[p2]);
 
                             if (allPersons[p2] is Citizen)
                             {
                                 if (citizen.Inventory.Count > 0)
-                                    {
+                                {
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} stole {citizen.Inventory[0]} from citizen {citizen.Name}."));
                                     thief.Inventory.Add(citizen.Inventory[0]);
                                     citizen.Inventory.RemoveAt(0);
@@ -139,8 +144,8 @@ namespace Grupparbete_PolisOchTjuv
                         }
                         else if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
                         {
-                            var thief = (Thief) (allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
-                            var police = (Police) (allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
+                            var thief = (Thief)(allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
+                            var police = (Police)(allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
                             if (thief.Inventory.Count > 0)
                             {
                                 GeneratePosition(thief, 10, 10);
@@ -156,15 +161,20 @@ namespace Grupparbete_PolisOchTjuv
                             }
                             else if (thief.Inventory.Count == 0)
                             {
-                                newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT
+                                newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT
                             }
                         }
 
                         else if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
                         {
-                            newsNumber = SayHello(allPersons[p1], allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
+                            newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
                             break;
 
+                        }
+                        else if (allPersons[p1] is Citizen && allPersons[p2] is Citizen)
+                        {
+                            newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
+                            break;
                         }
                     }
                     foreach (Person person in removeList)
@@ -182,6 +192,7 @@ namespace Grupparbete_PolisOchTjuv
             {
 
                 case 'p':
+
                     List<Police> newPolice = Helpers.CreatePolice();
                     allPersons.Add(newPolice[0]);
                     fullPeopleList.Add(newPolice[0]);
@@ -207,7 +218,7 @@ namespace Grupparbete_PolisOchTjuv
 
             }
             return newsNumber;
-        }              
+        }
 
         internal static int RemoveFromPrison(List<Person> inmates, List<Person> allPersons, Queue<string> newsFeed, int newsNumber)
         {
@@ -258,11 +269,6 @@ namespace Grupparbete_PolisOchTjuv
         }
     }
 
-
-
-
-
-
     class Thief : Person
     {
         public DateTime PrisonStart;
@@ -273,26 +279,53 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
 
         }
+        internal override int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
+        {
+            if (/*this is Thief && */p2 is Police && this.Inventory.Count == 0)//T(inv 0) till P 
+            {
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+                newsNumber++;
 
+            }
 
+            return newsNumber;
+        }
     }
 
     class Citizen : Person
-        {
+    {
         public DateTime PoorHouseStart;
         public DateTime PoorHouseStop;
 
-            public Citizen(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
-            {
-                Inventory = inventory;
-            }
+        public Citizen(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
+        {
+            Inventory = inventory;
         }
+        internal override int SayHello(/*Person p1, */Person p2, Queue<string> newsFeed, int newsNumber)
+        {
+            Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
+            return newsNumber + 1;
+        }
+    }
 
     class Police : Person
+    {
+        public Police(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
         {
-            public Police(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
-            {
-                Inventory = inventory;
-            }
+            Inventory = inventory;
         }
+
+        internal override int SayHello(/*Person p1, */Person p2, Queue<string> newsFeed, int newsNumber)
+        {
+            if (/*this is Thief && */p2 is Thief && p2.Inventory.Count == 0)//T(inv 0) till P 
+            {
+                Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}."));
+                newsNumber++;
+
+            }
+
+            return newsNumber;
+        }
+
+    }
 }
