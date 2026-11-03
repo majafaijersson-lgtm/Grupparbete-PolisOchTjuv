@@ -72,8 +72,8 @@ namespace Grupparbete_PolisOchTjuv
 
         internal virtual int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
         {
-            //Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
-            return newsNumber + 1;
+            ////Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
+            return newsNumber;
         }
         //private static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
         //{
