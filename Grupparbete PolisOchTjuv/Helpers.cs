@@ -68,6 +68,34 @@ namespace Grupparbete_PolisOchTjuv
             return Names[rnd];
         }
 
+        internal static void PrintCityOverview(City myCity, List<Person> cityList, PoorHouse myPoorHouse, List<Person> poorPeople, Prison myPrison, List<Person> inmates, List<Person> allPersonList, Queue<string> newsFeed)
+
+        {
+            Console.WriteLine("CITY");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Place.PrintMap(myCity, cityList);
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.WriteLine("POORHOUSE");
+            Console.WriteLine("--------------------------------------------------");
+            PoorHouse.PrintMap(myPoorHouse, poorPeople);
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.WriteLine("PRISON");
+            Console.WriteLine("----------");
+            Prison.PrintMap(myPrison, inmates);
+            Console.WriteLine("----------");
+            Console.WriteLine();
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("STATUS:");
+            Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Place.PrintNewsFeed(newsFeed);
+            Thread.Sleep(200);
+        }
+
         internal static List<Police> CreatePolice()
         {
             List<Police> personList = new List<Police>();

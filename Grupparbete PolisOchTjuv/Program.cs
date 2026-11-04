@@ -8,7 +8,7 @@ namespace Grupparbete_PolisOchTjuv
     {
        internal static void Main(string[] args)
        {
-
+            
             List<Person> inmates = new List<Person>();
             List<Person> poorPeople = new List<Person>();
 
@@ -27,13 +27,13 @@ namespace Grupparbete_PolisOchTjuv
             List<Thief> thiefList = new List<Thief>();
             thiefList = Helpers.CreateThief();
 
-            List<Person> allPersons = new List<Person>();
-            List<Person> fullPeopleList = new List<Person>();
+            List<Person> cityList = new List<Person>();
+            List<Person> allPersonList = new List<Person>();
 
-            allPersons.AddRange(thiefList);
-            allPersons.AddRange(policeList);
-            allPersons.AddRange(citizenList);
-            fullPeopleList.AddRange(allPersons);
+            cityList.AddRange(thiefList);
+            cityList.AddRange(policeList);
+            cityList.AddRange(citizenList);
+            allPersonList.AddRange(cityList);
             Console.ReadKey(true);
 
             int newsNumber = 1;
@@ -41,6 +41,7 @@ namespace Grupparbete_PolisOchTjuv
 
             while (true)
             {
+                // Om tangentinmatning sparar en char input. Om input = V ändrar man bool.
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
@@ -51,58 +52,29 @@ namespace Grupparbete_PolisOchTjuv
                         textMode = !textMode;
                         Console.Clear();
                     }
-
-                    newsNumber = Person.AddPerson(allPersons, fullPeopleList, input, newsFeed, newsNumber);
+                    // Newsnumber returnernas från metoden
+                    newsNumber = Person.AddPerson(cityList, allPersonList, input, newsFeed, newsNumber);
 
                 }
                 Thread.Sleep(100);
-                Person.PersonMove(allPersons, myCity);
+                Person.PersonMove(cityList, myCity);
                 Person.PersonMove(inmates, myPrison);
                 Person.PersonMove(poorPeople, myPoorHouse);
-                newsNumber = Person.PersonCollision(allPersons, inmates, poorPeople, newsFeed, newsNumber);
-                newsNumber = Person.RemoveFromPrison(inmates, allPersons, newsFeed, newsNumber);
-                newsNumber = Person.RemoveFromPoorHouse(poorPeople, allPersons, newsFeed, newsNumber);
-
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo key = Console.ReadKey(true);
-                    char input = (char)key.KeyChar;
-                }
+                newsNumber = Person.PersonCollision(cityList, inmates, poorPeople, newsFeed, newsNumber);
+                newsNumber = Person.RemoveFromPrison(inmates, cityList, newsFeed, newsNumber);
+                newsNumber = Person.RemoveFromPoorHouse(poorPeople, cityList, newsFeed, newsNumber);
 
                 if (!textMode)
                 {
-
-                    Console.WriteLine("CITY");
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Place.PrintMap(myCity, allPersons);
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine(" ");
-                    Console.WriteLine(" ");
-                    Console.WriteLine("POORHOUSE");
-                    Console.WriteLine("--------------------------------------------------");
-                    PoorHouse.PrintMap(myPoorHouse, poorPeople);
-                    Console.WriteLine("--------------------------------------------------");
-                    Console.WriteLine(" ");
-                    Console.WriteLine(" ");
-                    Console.WriteLine("PRISON");
-                    Console.WriteLine("----------");
-                    Prison.PrintMap(myPrison, inmates);
-                    Console.WriteLine("----------");
-                    Console.WriteLine();
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("STATUS:");
-                    Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Place.PrintNewsFeed(newsFeed);
-                    Thread.Sleep(200);
+                    Helpers.PrintCityOverview(myCity, cityList, myPoorHouse, poorPeople, myPrison, inmates, allPersonList, newsFeed);
 
                 }
                 else
                 {
-                    Person.PrintPersonInfo(fullPeopleList);
+                    Person.PrintPersonInfo(allPersonList);
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("STATUS:");
-                    Place.PrintStatus(allPersons, fullPeopleList, inmates, poorPeople);
+                    Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
                     Console.WriteLine("----------------------------------------------------------------------------------------------------");
                     Place.PrintNewsFeed(newsFeed);
                     Thread.Sleep(200);

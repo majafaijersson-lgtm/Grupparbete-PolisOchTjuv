@@ -72,38 +72,8 @@ namespace Grupparbete_PolisOchTjuv
 
         internal virtual int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
         {
-            ////Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
             return newsNumber;
         }
-        //private static int SayHello(Person p1, Person p2, Queue<string> newsFeed, int newsNumber)
-        //{
-        //    if (p1 is Citizen && p2 is Citizen) //C säger hej till C
-        //    {
-        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-        //        newsNumber++;
-        //    }
-
-        //    else if ((p1 is Citizen && p2 is Police) || //C säger Hej till P
-        //             (p1 is Police && p2 is Citizen))
-        //    {
-        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-        //        newsNumber++;
-        //    }
-
-        //    else if (p1 is Police && p2 is Thief && p2.Inventory.Count == 0) //P till T(inv = 0)
-        //    {
-        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-        //        newsNumber++;
-        //    }
-        //    else if (p1 is Thief && p2 is Police && p1.Inventory.Count == 0)//T(inv 0) till P 
-        //    {
-        //        Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {p1.GetType().Name} {p1.Name} says hello to {p2.GetType().Name} {p2.Name}."));
-        //        newsNumber++;
-
-        //    }
-        //    return newsNumber;
-        //}
-
         internal static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
         {
             List<Person> removeList = new List<Person>();
