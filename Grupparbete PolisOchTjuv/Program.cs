@@ -41,7 +41,7 @@ namespace Grupparbete_PolisOchTjuv
 
             while (true)
             {
-                // Om tangentinmatning sparar en char input. Om input = V ändrar man bool.
+                                                                                                                                                        // Om tangentinmatning sparar en char input. Om input = V ändrar man bool.
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
@@ -52,7 +52,7 @@ namespace Grupparbete_PolisOchTjuv
                         textMode = !textMode;
                         Console.Clear();
                     }
-                    // Newsnumber returnernas från metoden
+                                                                                                                                                        // Newsnumber returnernas från metoden
                     newsNumber = Person.AddPerson(cityList, allPersonList, input, newsFeed, newsNumber);
                 }
 

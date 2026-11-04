@@ -29,7 +29,7 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
         }
 
-        internal static void PrintPersonInfo(List<Person> fullPeopleList)
+        internal static void PrintPersonInfo(List<Person> fullPeopleList)                                                                                       //SKriver ut type, invenotry, pos x +y för alla personer. Används i PrintTextOverview.
         {
             for (int i = 0; i < fullPeopleList.Count; i++)
             {
@@ -43,17 +43,17 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        internal static void PersonMove(List<Person> allPersons, Place map) //List inparameter rndMovementX och Y för att göra riktningsädnringar
+        internal static void PersonMove(List<Person> cityList, Place map)                                                                                           //List innehåller koordinater och map innehåller strukturen/ritning för kartan.
         {
-            foreach (Person person in allPersons)
+            foreach (Person person in cityList)
             {
 
-                person.CurrentPositionX += person.MovePositionX;
+                person.CurrentPositionX += person.MovePositionX;                                                                                                    //Nuvarande position + riktningsändring i x- och y-led
                 person.CurrentPositionY += person.MovePositionY;
 
                 if (person.CurrentPositionX <= 0)
                 {
-                    person.CurrentPositionX = map.Width;
+                    person.CurrentPositionX = map.Width;                                                                                                            //Om personen rör sig utanför kanten så återställs currentposition till motsatt sida.
                 }
                 else if (person.CurrentPositionX >= map.Width)
                 {
@@ -61,7 +61,7 @@ namespace Grupparbete_PolisOchTjuv
                 }
                 else if (person.CurrentPositionY <= 0)
                 {
-                    person.CurrentPositionY = map.Height;
+                    person.CurrentPositionY = map.Height;                                                                                                           //Samma som ovan fast y-led
                 }
                 else if (person.CurrentPositionY >= map.Height)
                 {
@@ -70,28 +70,27 @@ namespace Grupparbete_PolisOchTjuv
             }
         }
 
-        internal virtual int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
+        internal virtual int SayHello(Person p2, Queue<string> newsFeed, int newsNumber)                                                                            //Polymorfism
         {
             return newsNumber;
         }
-        internal static int PersonCollision(List<Person> allPersons, List<Person> inmates, List<Person> poorHouse, Queue<string> newsFeed, int newsNumber)
+
+        internal static int PersonCollision(List<Person> cityList, List<Person> inmates, List<Person> poorPeople, Queue<string> newsFeed, int newsNumber)
         {
-            List<Person> removeList = new List<Person>();
+            List<Person> removeList = new List<Person>();                                                                                                           //Samlar personen som ska byta plats. De tas bort i slutet.
 
-            for (int p1 = 0; p1 < allPersons.Count - 1; p1++)
+            for (int p1 = 0; p1 < cityList.Count - 1; p1++)                                                                                                         //Tar en person och jämför med alla andra personer i cityList(två första for-looparna).
             {
-                for (int p2 = p1 + 1; p2 < allPersons.Count; p2++) // -1?
+                for (int p2 = p1 + 1; p2 < cityList.Count; p2++)                                                                                                    //Ej  cityList.COunt - 1 pga loopen avslutas innan sista indexet för att det är slut på personer att jämföra. 
                 {
-                    if (allPersons[p1].CurrentPositionX == allPersons[p2].CurrentPositionX && allPersons[p1].CurrentPositionY == allPersons[p2].CurrentPositionY)
+                    if (cityList[p1].CurrentPositionX == cityList[p2].CurrentPositionX && cityList[p1].CurrentPositionY == cityList[p2].CurrentPositionY)           //Positionsjämförelse p1 och p2.
                     {
-                        if (allPersons[p1] is Thief && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Thief)
+                        if (cityList[p1] is Thief && cityList[p2] is Citizen || cityList[p1] is Citizen && cityList[p2] is Thief)
                         {
-                            var thief = (Thief)(allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
-                            var citizen = (Citizen)(allPersons[p1] is Citizen ? allPersons[p1] : allPersons[p2]);
+                            var thief = (Thief)(cityList[p1] is Thief ? cityList[p1] : cityList[p2]);                                                               //Undersöker vilken av p1 och p2 som är tjuv -> sparar i varsin variabel.
+                            var citizen = (Citizen)(cityList[p1] is Citizen ? cityList[p1] : cityList[p2]);
 
-                            if (allPersons[p2] is Citizen)
-                            {
-                                if (citizen.Inventory.Count > 0)
+                                if (citizen.Inventory.Count > 0)                                                                                                    //Om inventory > 0 så blir den rånad
                                 {
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Thief {thief.Name} stole {citizen.Inventory[0]} from citizen {citizen.Name}."));
                                     thief.Inventory.Add(citizen.Inventory[0]);
@@ -99,23 +98,24 @@ namespace Grupparbete_PolisOchTjuv
                                     newsNumber++;
                                 }
 
-                                if (citizen.Inventory.Count == 0)
+                                if (citizen.Inventory.Count == 0)                                                                                                   //När den blir bestulen och inventory blir == 0
                                 {
                                     GeneratePosition(citizen, 50, 10);
                                     Place.AddNewsFeed(newsFeed, ($"{newsNumber}. Citizen {citizen.Name} was sent to poorhouse."));
                                     citizen.PoorHouseStart = DateTime.Now;
                                     citizen.PoorHouseStop = citizen.PoorHouseStart.AddSeconds(10);
-                                    poorHouse.Add(citizen);
+                                    poorPeople.Add(citizen);
                                     removeList.Add(citizen);
                                     newsNumber++;
-
                                 }
-                            }
+
                         }
-                        else if (allPersons[p1] is Police && allPersons[p2] is Thief || allPersons[p1] is Thief && allPersons[p2] is Police)
+
+                        else if (cityList[p1] is Police && cityList[p2] is Thief || cityList[p1] is Thief && cityList[p2] is Police)                                //Om en av personerna är police och den andra tjuv
                         {
-                            var thief = (Thief)(allPersons[p1] is Thief ? allPersons[p1] : allPersons[p2]);
-                            var police = (Police)(allPersons[p1] is Police ? allPersons[p1] : allPersons[p2]);
+                            var thief = (Thief)(cityList[p1] is Thief ? cityList[p1] : cityList[p2]);
+                            var police = (Police)(cityList[p1] is Police ? cityList[p1] : cityList[p2]);
+
                             if (thief.Inventory.Count > 0)
                             {
                                 GeneratePosition(thief, 10, 10);
@@ -131,25 +131,26 @@ namespace Grupparbete_PolisOchTjuv
                             }
                             else if (thief.Inventory.Count == 0)
                             {
-                                newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT
+                                newsNumber = cityList[p1].SayHello(cityList[p2], newsFeed, newsNumber);
                             }
                         }
 
-                        else if (allPersons[p1] is Police && allPersons[p2] is Citizen || allPersons[p1] is Citizen && allPersons[p2] is Police)
+                        else if (cityList[p1] is Police && cityList[p2] is Citizen || cityList[p1] is Citizen && cityList[p2] is Police)                            //Om polis och medborgare möts
                         {
-                            newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
+                            newsNumber = cityList[p1].SayHello(cityList[p2], newsFeed, newsNumber);
                             break;
 
                         }
-                        else if (allPersons[p1] is Citizen && allPersons[p2] is Citizen)
+                        else if (cityList[p1] is Citizen && cityList[p2] is Citizen)
                         {
-                            newsNumber = allPersons[p1].SayHello(/*allPersons[p1],*/ allPersons[p2], newsFeed, newsNumber); //NYTT newsNumber =
+                            newsNumber = cityList[p1].SayHello(cityList[p2], newsFeed, newsNumber);
                             break;
                         }
                     }
-                    foreach (Person person in removeList)
+
+                    foreach (Person person in removeList)                                                                                                           //Tar bort alla som ska flyttas till annat place från cityList.
                     {
-                        allPersons.Remove(person);
+                        cityList.Remove(person);
                     }
                 }
             }
@@ -197,7 +198,7 @@ namespace Grupparbete_PolisOchTjuv
                 for (int i = 0; i < inmates.Count; i++)
                 {
 
-                    if (((Thief)inmates[i]).PrisonStop <= DateTime.Now)
+                    if (((Thief)inmates[i]).PrisonStop <= DateTime.Now)                                                                                         //Loopen körs om fångens stopptid har passerat Datetime.Now.
                     {
                         allPersons.Add(inmates[i]);
                         Place.AddNewsFeed(newsFeed, $"{newsNumber}. Thief {inmates[i].Name} is released from prison into the city.");
@@ -216,14 +217,13 @@ namespace Grupparbete_PolisOchTjuv
                 for (int i = 0; i < poorPeople.Count; i++)
                 {
 
-                    if (((Citizen)poorPeople[i]).PoorHouseStop <= DateTime.Now)
+                    if (((Citizen)poorPeople[i]).PoorHouseStop <= DateTime.Now)                                                                                 //Loopen körs om slumens stopptid har passerat Datetime.Now.
                     {
                         poorPeople[i].Inventory.Add("money");
                         allPersons.Add(poorPeople[i]);
                         Place.AddNewsFeed(newsFeed, $"{newsNumber}. Slum {poorPeople[i].Name} is released from poor house into the city with a bit of money.");
                         poorPeople.Remove(poorPeople[i]);
                         newsNumber++;
-
                     }
                 }
             }
@@ -242,20 +242,19 @@ namespace Grupparbete_PolisOchTjuv
     class Thief : Person
     {
         public DateTime PrisonStart;
-        public DateTime PrisonStop; //Använda det eller göra på annat sätt?
+        public DateTime PrisonStop;
 
         public Thief(string name, char icon, ConsoleColor iconColor, int currentPositionX, int currentPositionY, int movePositionX, int movePositionY, List<string> inventory) : base(name, icon, iconColor, currentPositionX, currentPositionY, movePositionX, movePositionY, inventory)
         {
             Inventory = inventory;
 
         }
-        internal override int SayHello(/*Person p1,*/ Person p2, Queue<string> newsFeed, int newsNumber)
+        internal override int SayHello(Person p2, Queue<string> newsFeed, int newsNumber)
         {
-            if (/*this is Thief && */p2 is Police && this.Inventory.Count == 0)//T(inv 0) till P 
+            if (p2 is Police && this.Inventory.Count == 0)
             {
                 Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
-
             }
 
             return newsNumber;
@@ -271,7 +270,7 @@ namespace Grupparbete_PolisOchTjuv
         {
             Inventory = inventory;
         }
-        internal override int SayHello(/*Person p1, */Person p2, Queue<string> newsFeed, int newsNumber)
+        internal override int SayHello(Person p2, Queue<string> newsFeed, int newsNumber)
         {
             Place.AddNewsFeed(newsFeed, $"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}.");
             return newsNumber + 1;
@@ -285,17 +284,15 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
         }
 
-        internal override int SayHello(/*Person p1, */Person p2, Queue<string> newsFeed, int newsNumber)
+        internal override int SayHello(Person p2, Queue<string> newsFeed, int newsNumber)
         {
-            if (/*this is Thief && */p2 is Thief && p2.Inventory.Count == 0)//T(inv 0) till P 
+            if (p2 is Thief && p2.Inventory.Count == 0)
             {
                 Place.AddNewsFeed(newsFeed, ($"{newsNumber}. {this.GetType().Name} {this.Name} says hello to {p2.GetType().Name} {p2.Name}."));
                 newsNumber++;
-
             }
 
             return newsNumber;
         }
-
     }
 }
