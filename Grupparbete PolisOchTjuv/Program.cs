@@ -54,8 +54,8 @@ namespace Grupparbete_PolisOchTjuv
                     }
                     // Newsnumber returnernas från metoden
                     newsNumber = Person.AddPerson(cityList, allPersonList, input, newsFeed, newsNumber);
-
                 }
+
                 Thread.Sleep(100);
                 Person.PersonMove(cityList, myCity);
                 Person.PersonMove(inmates, myPrison);
