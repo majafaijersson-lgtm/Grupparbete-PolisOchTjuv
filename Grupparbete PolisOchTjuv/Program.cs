@@ -67,18 +67,12 @@ namespace Grupparbete_PolisOchTjuv
                 if (!textMode)
                 {
                     Helpers.PrintCityOverview(myCity, cityList, myPoorHouse, poorPeople, myPrison, inmates, allPersonList, newsFeed);
-
                 }
                 else
                 {
-                    Person.PrintPersonInfo(allPersonList);
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("STATUS:");
-                    Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
-                    Console.WriteLine("----------------------------------------------------------------------------------------------------");
-                    Place.PrintNewsFeed(newsFeed);
-                    Thread.Sleep(200);
+                    Helpers.PrintTextOverview(cityList, poorPeople, myPrison, inmates, allPersonList, newsFeed);
                 }
+
                 Console.SetCursorPosition(0, 0);
             }
         }

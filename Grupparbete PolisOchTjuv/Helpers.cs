@@ -69,7 +69,6 @@ namespace Grupparbete_PolisOchTjuv
         }
 
         internal static void PrintCityOverview(City myCity, List<Person> cityList, PoorHouse myPoorHouse, List<Person> poorPeople, Prison myPrison, List<Person> inmates, List<Person> allPersonList, Queue<string> newsFeed)
-
         {
             Console.WriteLine("CITY");
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
@@ -88,6 +87,17 @@ namespace Grupparbete_PolisOchTjuv
             Prison.PrintMap(myPrison, inmates);
             Console.WriteLine("----------");
             Console.WriteLine();
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("STATUS:");
+            Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Place.PrintNewsFeed(newsFeed);
+            Thread.Sleep(200);
+        }
+
+        internal static void PrintTextOverview(List<Person> cityList, List<Person> poorPeople, Prison myPrison, List<Person> inmates, List<Person> allPersonList, Queue<string> newsFeed)
+        {
+            Person.PrintPersonInfo(allPersonList);
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
             Console.WriteLine("STATUS:");
             Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
