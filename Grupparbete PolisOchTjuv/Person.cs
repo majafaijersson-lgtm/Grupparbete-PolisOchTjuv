@@ -29,7 +29,7 @@ namespace Grupparbete_PolisOchTjuv
             Inventory = inventory;
         }
 
-        internal static void PrintPersonInfo(List<Person> fullPeopleList)                                                                                       //SKriver ut type, invenotry, pos x +y för alla personer. Används i PrintTextOverview.
+        internal static void PrintPersonInfo(List<Person> fullPeopleList)                                                                                           //SKriver ut type, invenotry, pos x +y för alla personer. Används i PrintTextOverview.
         {
             for (int i = 0; i < fullPeopleList.Count; i++)
             {
