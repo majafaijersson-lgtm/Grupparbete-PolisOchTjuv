@@ -56,7 +56,7 @@ namespace Grupparbete_PolisOchTjuv
                     newsNumber = Person.AddPerson(cityList, allPersonList, input, newsFeed, newsNumber);
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(300);
                 Person.PersonMove(cityList, myCity);
                 Person.PersonMove(inmates, myPrison);
                 Person.PersonMove(poorPeople, myPoorHouse);

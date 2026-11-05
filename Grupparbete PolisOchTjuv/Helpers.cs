@@ -88,7 +88,7 @@ namespace Grupparbete_PolisOchTjuv
             Console.WriteLine("----------");
             Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
-            Console.WriteLine("STATUS:");
+            Console.WriteLine("STATUS");
             Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
             Place.PrintNewsFeed(newsFeed);
@@ -99,14 +99,14 @@ namespace Grupparbete_PolisOchTjuv
         {
             Person.PrintPersonInfo(allPersonList);
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
-            Console.WriteLine("STATUS:");
+            Console.WriteLine("STATUS");
             Place.PrintStatus(cityList, allPersonList, inmates, poorPeople);
             Console.WriteLine("----------------------------------------------------------------------------------------------------");
             Place.PrintNewsFeed(newsFeed);
             Thread.Sleep(200);
         }
 
-        internal static List<Police> CreatePolice()
+        internal static List<Police> CreatePolice()                                                                                             //Förbättring: borde ligga under person, kan göras med en metod för alla tre subclasser. virtual/override
         {
             List<Police> personList = new List<Police>();
 

@@ -28,7 +28,7 @@ namespace Grupparbete_PolisOchTjuv
                 {
                     if (col == 0 || col == myPlace.Width - 1)                                                                                                   //Om kant vänster eller höger -> X
                     {
-                        Console.Write('X');
+                        Console.Write('|');
                     }
 
                     else                                                                                                                                        //annars, skriv ut person på deras platser
